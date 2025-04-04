@@ -1,15 +1,69 @@
-{% load static tailwind_tags %} # to include tailwind tags
+{% load static tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>AutoHub</title>
-    {% tailwind_css %}  # to include tailwind css
+    <title>AutoHub - Authentication</title>
+    {% tailwind_css %}
 </head>
-<body class="flex items-center justify-center h-screen bg-gray-100">
-    <div class="text-center bg-white shadow-lg p-6 rounded-lg">
-        <h1 class="text-3xl font-bold text-gray-800">Welcome to AutoHub</h1>
-        <p class="text-gray-600 mt-2">GROUP 1</p>
+<body class="flex items-center justify-center min-h-screen bg-gray-900">
+    <div class="w-full max-w-4xl flex gap-6 text-white">
+        
+        <!-- Create Account Section -->
+        <div class="w-1/2 bg-white text-gray-900 rounded-lg shadow-lg p-6 relative">
+            <img src="{% static 'images/VW_GTI.avif' %}" alt="Car Image" class="absolute top-0 left-0 w-full h-40 object-cover rounded-t-lg">
+            <div class="relative mt-44 text-center">
+                <h1 class="text-xl font-bold">AutoHub</h1>
+                <p class="text-gray-600">Find your next car.</p>
+            </div>
+            <div class="mt-6">
+                <h2 class="text-center text-lg font-semibold">CREATE ACCOUNT</h2>
+                <form class="mt-4 space-y-3">
+                    <div>
+                        <label class="block text-sm">Name</label>
+                        <input type="text" placeholder="Enter your Name" class="w-full p-2 border rounded-md">
+                    </div>
+                    <div>
+                        <label class="block text-sm">Email</label>
+                        <input type="email" placeholder="Enter your Email" class="w-full p-2 border rounded-md">
+                    </div>
+                    <div>
+                        <label class="block text-sm">Password</label>
+                        <input type="password" placeholder="Enter your Password" class="w-full p-2 border rounded-md">
+                    </div>
+                    <button class="w-full bg-gray-800 text-white p-2 rounded-md hover:bg-gray-700">CREATE</button>
+                    <a href="#" class="block text-center text-sm text-gray-500 mt-2 hover:underline">LOGIN</a>
+                </form>
+            </div>
+        </div>
+
+        <!-- Login Section -->
+        <div class="w-1/2 bg-white text-gray-900 rounded-lg shadow-lg p-6 relative">
+            <img src="{% static 'images/VW_GTI.avif' %}" alt="Car Image" class="absolute top-0 left-0 w-full h-40 object-cover rounded-t-lg">
+            <div class="relative mt-44 text-center">
+                <h1 class="text-xl font-bold">AutoHub</h1>
+                <p class="text-gray-600">Find your next car.</p>
+            </div>
+            <div class="mt-6">
+                <h2 class="text-center text-lg font-semibold">LOGIN</h2>
+                <form class="mt-4 space-y-3">
+                    <div>
+                        <label class="block text-sm">Email</label>
+                        <input type="email" placeholder="Enter your Email" class="w-full p-2 border rounded-md">
+                    </div>
+                    <div>
+                        <label class="block text-sm">Password</label>
+                        <input type="password" placeholder="Enter your Password" class="w-full p-2 border rounded-md">
+                    </div>
+                    <button class="w-full bg-gray-800 text-white p-2 rounded-md hover:bg-gray-700">SIGN IN</button>
+                    <div class="flex justify-between text-sm text-gray-500 mt-2">
+                        <a href="#" class="hover:underline">CREATE ACCOUNT</a>
+                        <a href="#" class="hover:underline">FORGOT PASSWORD</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
