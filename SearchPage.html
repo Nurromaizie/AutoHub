@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-white to-gray-200">
+    <div class="absolute top-4 left-4 text-gray-600 text-2xl cursor-pointer">&#9776;</div>
+    <div class="absolute top-4 right-4 text-gray-600 text-2xl cursor-pointer">&#128100;</div>
+    
+    <h1 class="text-gray-600 text-xl mb-4">Search</h1>
+    <div class="relative w-80">
+        <input type="text" placeholder="Search" class="w-full p-2 pl-4 pr-10 border border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500">
+        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">&#128269;</span>
+    </div>
+    
+    <p class="text-gray-500 mt-16 text-lg">Looking for something specific?</p>
+    
+    <p class="text-gray-400 text-sm absolute bottom-4">No results found for "*". Check the spelling or use a different word or phrase.</p>
+</body>
+<style>
+    @media screen and (max-width: 430px) {
+        body {
+            padding: 16px;
+            background: linear-gradient(to bottom, white, #e0e0e0);
+        }
+        .w-80 {
+            width: calc(100% - 32px);
+        }
+        .absolute {
+            position: absolute;
+        }
+        .top-4 {
+            top: 16px;
+        }
+        .bottom-4 {
+            bottom: 16px;
+        }
+    }
+
+    /* Adjustments for larger screens (e.g., iPhone 16) */
+    @media screen and (min-width: 430px) and (max-width: 900px) {
+        body {
+            padding: 24px;
+            background: linear-gradient(to bottom, white, #d6d6d6);
+        }
+        .w-80 {
+            width: 90%;
+        }
+        .top-4 {
+            top: 24px;
+        }
+        .bottom-4 {
+            bottom: 24px;
+        }
+    }
+
+    @media screen and (min-width: 900px) {
+        body {
+            padding: 32px;
+            background: linear-gradient(to bottom, white, #cccccc);
+        }
+        .w-80 {
+            width: 60%;
+        }
+        .top-4 {
+            top: 32px;
+        }
+        .bottom-4 {
+            bottom: 32px;
+        }
+    }
+</style>
