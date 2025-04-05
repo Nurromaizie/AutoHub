@@ -1,5 +1,7 @@
-<html>
+<html lang="en">
  <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>
    AutoHub
   </title>
@@ -8,100 +10,138 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
  </head>
  <body class="bg-gray-100">
-  <header class="relative">
-   <img alt="White car under a bridge" class="w-full h-64 object-cover" height="200" src="https://storage.googleapis.com/a1aa/image/5J65tMZ9h-oIKREyc6Kw-LVGMQ1mIndhPPosilNhVCw.jpg" width="375"/>
-   <div class="absolute top-0 left-0 p-4">
-    <div class="bg-yellow-500 text-white px-2 py-1 rounded">
-     BND
+  <header class="bg-white shadow-md">
+   <div class="container mx-auto flex justify-between items-center p-4">
+    <div class="flex items-center">
+     <button class="text-gray-600 text-2xl">
+      <i class="fas fa-bars">
+      </i>
+     </button>
+     <span class="ml-4 text-lg font-bold">
+      BND
+     </span>
     </div>
-   </div>
-   <div class="absolute top-0 right-0 p-4">
-    <h1 class="text-white text-2xl font-bold">
+    <h1 class="text-2xl font-bold">
      AutoHub
     </h1>
-   </div>
-   <div class="absolute bottom-0 left-0 p-4">
-    <h2 class="text-white text-3xl font-bold">
-     Find your next car.
-    </h2>
+    <div class="flex items-center">
+     <button class="text-gray-600 text-2xl">
+      <i class="fas fa-user">
+      </i>
+     </button>
+    </div>
    </div>
   </header>
-  <main class="p-4">
-   <section class="mb-4">
-    <div class="flex justify-between items-center mb-2">
-     <h3 class="text-lg font-bold">
+  <main>
+   <section class="relative">
+    <img alt="A white car parked in a modern building" class="w-full h-64 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/RCDb6uWjip3zpZi92v6t9snboBJ5R0Va-UnF1-foITM.jpg" width="600"/>
+    <div class="absolute inset-0 flex flex-col justify-center items-center text-white">
+     <h2 class="text-4xl font-bold">
+      Find your next car.
+     </h2>
+    </div>
+   </section>
+   <section class="container mx-auto p-4">
+    <div class="bg-white p-4 rounded shadow-md">
+     <h3 class="text-lg font-bold mb-4">
       RECENT CARS FOR SALE IN BRUNEI DARUSSALAM
      </h3>
-     <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full flex items-center">
-      <i class="fas fa-search mr-2">
-      </i>
-      SEARCH
-     </button>
-    </div>
-    <div class="flex space-x-2 mb-4">
-     <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full">
-      BRAND
-     </button>
-     <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full">
-      PRICE
-     </button>
-     <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full">
-      MODEL
-     </button>
-     <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full">
-      SEATER
-     </button>
-     <a class="text-gray-500 ml-auto" href="#">
-      Clear all
-     </a>
+     <div class="flex items-center mb-4">
+      <input class="flex-grow p-2 border rounded-l" placeholder="Search" type="text"/>
+      <button class="bg-gray-800 text-white p-2 rounded-r">
+       <i class="fas fa-search">
+       </i>
+       SEARCH
+      </button>
+     </div>
+     <div class="flex flex-wrap justify-between mb-4">
+      <div class="flex flex-wrap space-x-2">
+       <button class="bg-gray-200 p-2 rounded mb-2">
+        BROWSE
+       </button>
+       <button class="bg-gray-200 p-2 rounded mb-2">
+        BRAND
+       </button>
+       <button class="bg-gray-200 p-2 rounded mb-2">
+        PRICE
+       </button>
+       <button class="bg-gray-200 p-2 rounded mb-2">
+        MODEL
+       </button>
+       <button class="bg-gray-200 p-2 rounded mb-2">
+        SEATER
+       </button>
+      </div>
+      <button class="text-gray-600 mb-2">
+       Clear all
+      </button>
+     </div>
+     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="bg-white p-4 rounded shadow-md">
+       <img alt="Toyota Fortuner" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/eXtlyF_3xT4XHdRvq8tWwkYTguU6uxcbYftB0RXZh5E.jpg" width="150"/>
+       <h4 class="text-center">
+        Toyota Fortuner
+       </h4>
+      </div>
+      <div class="bg-white p-4 rounded shadow-md">
+       <img alt="Hyundai Elantra" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/roH9Yj8v8UkCD-FtouvKGexn4LdaT_PJh7JSyzXsv34.jpg" width="150"/>
+       <h4 class="text-center">
+        Hyundai Elantra
+       </h4>
+      </div>
+      <div class="bg-white p-4 rounded shadow-md">
+       <img alt="Kia K5" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/aG3294h7XwaX2T4pC0fsHruLOYyis_TKdP7ow2edDIE.jpg" width="150"/>
+       <h4 class="text-center">
+        Kia K5
+       </h4>
+      </div>
+      <div class="bg-white p-4 rounded shadow-md">
+       <img alt="Suzuki Jimny" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/e7beLaqd0M-NLCIBSiCaBhzCk-zKuT9bznNNK85Al78.jpg" width="150"/>
+       <h4 class="text-center">
+        Suzuki Jimny
+       </h4>
+      </div>
+      <div class="bg-white p-4 rounded shadow-md">
+       <img alt="Mazda MX-5" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/hkx-WgIAVejJMFEHfz3R45W5odmpsw-nJcPlCHa1QaM.jpg" width="150"/>
+       <h4 class="text-center">
+        Mazda MX-5
+       </h4>
+      </div>
+      <div class="bg-white p-4 rounded shadow-md">
+       <img alt="Haval H6 GT" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/ZmXNqSKHBgQ0hsiIFkduNbb1RAtyt9pEA54QeZLIKDM.jpg" width="150"/>
+       <h4 class="text-center">
+        Haval H6 GT
+       </h4>
+      </div>
+      <div class="bg-white p-4 rounded shadow-md">
+       <img alt="Kia Sportage" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/NP60sPZd2hr2I_crk4ZtxN_HpxdbPcMIHat9GzOVqvs.jpg" width="150"/>
+       <h4 class="text-center">
+        Kia Sportage
+       </h4>
+      </div>
+     </div>
+     <div class="flex justify-center mt-4">
+      <button class="text-gray-600">
+       <i class="fas fa-chevron-left">
+       </i>
+      </button>
+      <button class="text-gray-600 mx-2">
+       <i class="fas fa-chevron-right">
+       </i>
+      </button>
+     </div>
+     <div class="text-center mt-4">
+      <a class="text-blue-600" href="#">
+       View all cars
+      </a>
+     </div>
     </div>
    </section>
-   <section class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-    <div class="bg-white p-4 rounded-lg shadow">
-     <img alt="Toyota GR86" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/kQ9tPWWicyb-cDBVlZPcFirIS99iRiH4HOB4qldTZd4.jpg" width="150"/>
-     <h4 class="text-center">
-      Toyota GR86
-     </h4>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow">
-     <img alt="Porsche 718 Boxster" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/rPnVMCqzr0oqaKm32KX_OBBtm3Gg_MmGIspaBZziwGs.jpg" width="150"/>
-     <h4 class="text-center">
-      Porsche 718 Boxster
-     </h4>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow">
-     <img alt="Toyota Fortuner" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/uFtaxmkqZiovVNQtfzt-plFSJCjB8-3WHe6exXW5IhM.jpg" width="150"/>
-     <h4 class="text-center">
-      Toyota Fortuner
-     </h4>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow">
-     <img alt="Suzuki Jimmy" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/AUTry1q9LN-jE56CaEXj_5EpeKhAs2lIy-InqUYSqts.jpg" width="150"/>
-     <h4 class="text-center">
-      Suzuki Jimmy
-     </h4>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow">
-     <img alt="Mazda MX - 5" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/f6-XCdLNfPKCFXAispByYxqKqvZjYhBwav6URfOduJU.jpg" width="150"/>
-     <h4 class="text-center">
-      Mazda MX - 5
-     </h4>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow">
-     <img alt="Haval H6 GT" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/2gi1IwFtBnB6dt1oqy4vzzw6MbyIFFkMNEwNjxzSEKY.jpg" width="150"/>
-     <h4 class="text-center">
-      Haval H6 GT
-     </h4>
+   <section class="container mx-auto p-4">
+    <div class="bg-white p-4 rounded shadow-md">
+     <img alt="A white car side view" class="w-full h-48 object-cover" height="200" src="https://storage.googleapis.com/a1aa/image/K0ZZ2OEAVTK1eu3C9DjMAarPwIEVW3rUCdjMJRzBKc4.jpg" width="600"/>
     </div>
    </section>
-   <div class="text-center mt-4">
-    <a class="text-blue-500" href="#">
-     View all cars
-    </a>
-   </div>
-   <div class="mt-8">
-    <img alt="White car side view" class="w-full h-64 object-cover" height="200" src="https://storage.googleapis.com/a1aa/image/78l6khhez93SwonuOwkL8oDyzPVYytLC9K2v2W_YlKE.jpg" width="375"/>
-   </div>
   </main>
  </body>
 </html>
