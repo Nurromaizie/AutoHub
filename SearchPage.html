@@ -5,71 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Fade-in animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Fade-out animation */
+        .fade-out {
+            animation: fadeOut 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* Custom styles for the "Search" heading */
+        .search-heading {
+            display: flex;
+            width: 307px;
+            height: 34px;
+            flex-direction: column;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--textonspecsetc, #7F7F7F);
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin-top: -610px; /* Move the heading up */
+        }
+
+        /* Custom styles for the search input container */
+        .search-container {
+            display: flex;
+            width: 322px;
+            height: 47px;
+            flex-direction: column;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Custom styles for the "Looking for something specific?" text */
+        .looking-for-text {
+            color: var(--textonspecsetc, #7F7F7F);
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            
+            
+        }
+
+        /* Custom styles for the "No results found ..." text */
+        .no-results-text {
+            display: flex;
+            width: 307px;
+            height: 34px;
+            flex-direction: column;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #7F7F7F;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    </style>
 </head>
-<body class="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-white to-gray-200">
-    <div class="absolute top-4 left-4 text-gray-600 text-2xl cursor-pointer">&#9776;</div>
-    <div class="absolute top-4 right-4 text-gray-600 text-2xl cursor-pointer">&#128100;</div>
-    
-    <h1 class="text-gray-600 text-xl mb-4">Search</h1>
-    <div class="relative w-80">
-        <input type="text" placeholder="Search" class="w-full p-2 pl-4 pr-10 border border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500">
-        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">&#128269;</span>
+<body class="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-white to-gray-200 fade-in">
+    <!-- Three-line icon linked to Category page -->
+    <a href="{% url 'category' %}" class="absolute top-4 left-4 text-gray-600 text-2xl cursor-pointer">
+        &#9776;
+    </a>
+    <!-- Profile icon -->
+    <div class="absolute top-4 right-4 flex space-x-4 text-gray-600">
+        <button aria-label="Profile" class="hover:text-gray-200">
+            <i class="fas fa-user text-lg"></i>
+        </button>
     </div>
     
-    <p class="text-gray-500 mt-16 text-lg">Looking for something specific?</p>
+    <!-- Updated heading with custom styles -->
+    <div data-layer="Search" class="search-heading mb-4">Search</div>
     
-    <p class="text-gray-400 text-sm absolute bottom-4">No results found for "*". Check the spelling or use a different word or phrase.</p>
+    <!-- Updated rectangle text box -->
+    <div class="relative search-container">
+        <input type="text" placeholder="Search" class="w-full p-2 pl-4 pr-10 border border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500">
+        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+            <a href="{% url 'search' %}" class="flex items-center space-x-2 text-lg">
+                <i class="fas fa-search text-lg"></i>
+            </a>
+        </span>
+    </div>
+    
+    <!-- Updated "Looking for something specific?" text -->
+    <p class="looking-for-text mt-16">Looking for something specific?</p>
+    
+    <!-- Updated "No results found ..." text -->
+    <p class="no-results-text absolute bottom-4">No results found for "*". Check the spelling or use a different word or phrase.</p>
+
+    <script>
+        // Add fade-out effect when navigating to a new page
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                    window.location.href = link.href;
+                }, 500); // Match the duration of the fade-out animation
+            });
+        });
+    </script>
 </body>
-<style>
-    @media screen and (max-width: 430px) {
-        body {
-            padding: 16px;
-            background: linear-gradient(to bottom, white, #e0e0e0);
-        }
-        .w-80 {
-            width: calc(100% - 32px);
-        }
-        .absolute {
-            position: absolute;
-        }
-        .top-4 {
-            top: 16px;
-        }
-        .bottom-4 {
-            bottom: 16px;
-        }
-    }
-
-    /* Adjustments for larger screens (e.g., iPhone 16) */
-    @media screen and (min-width: 430px) and (max-width: 900px) {
-        body {
-            padding: 24px;
-            background: linear-gradient(to bottom, white, #d6d6d6);
-        }
-        .w-80 {
-            width: 90%;
-        }
-        .top-4 {
-            top: 24px;
-        }
-        .bottom-4 {
-            bottom: 24px;
-        }
-    }
-
-    @media screen and (min-width: 900px) {
-        body {
-            padding: 32px;
-            background: linear-gradient(to bottom, white, #cccccc);
-        }
-        .w-80 {
-            width: 60%;
-        }
-        .top-4 {
-            top: 32px;
-        }
-        .bottom-4 {
-            bottom: 32px;
-        }
-    }
-</style>
+</html>
