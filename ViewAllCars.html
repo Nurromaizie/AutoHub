@@ -1,113 +1,108 @@
+<!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   AutoHub
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
- </head>
- <body class="bg-gradient-to-b from-white to-gray-200">
-  <header class="relative">
-   <img alt="Header image with cars" class="w-full h-48 object-cover" height="200" src="https://storage.googleapis.com/a1aa/image/Pss8t8DDRQdeM6Es25psJSqfEl4krCQGub8dpvaXfDo.jpg" width="375"/>
-   <div class="absolute top-0 left-0 p-4">
-    <button class="bg-yellow-500 text-white px-3 py-1 rounded">
-     MENU
-    </button>
-   </div>
-   <div class="absolute top-0 right-0 p-4">
-    <h1 class="text-white text-2xl font-bold">
-     AutoHub
-    </h1>
-   </div>
-   <div class="absolute bottom-0 left-0 p-4">
-    <h2 class="text-white text-3xl font-bold">
-     Find your next car.
-    </h2>
-   </div>
-  </header>
-  <main class="p-4">
-   <div class="bg-white p-4 rounded shadow-md mb-4">
-    <div class="flex justify-between items-center">
-     <h3 class="text-lg font-bold">
-      AVAILABLE CARS FOR SALE IN BRUNEI DARUSSALAM
-     </h3>
-     <button class="bg-gray-200 p-2 rounded">
-      <i class="fas fa-search">
-      </i>
-      SEARCH
-     </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400&family=Montserrat:wght@300&family=Poppins:wght@700&family=Raleway&display=swap" rel="stylesheet">
+  <style>
+    body {
+      max-width: 430px;
+      margin: 0 auto;
+      background: linear-gradient(to bottom, #ffffff 50%, #999999 100%);
+    }
+    .autohub-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 24px;
+    }
+  </style>
+</head>
+
+<body class="font-sans">
+
+  <!-- Header Section -->
+  <div class="relative">
+    <div class="absolute top-2 left-2">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
     </div>
-    <div class="flex flex-wrap mt-4">
-     <button class="bg-gray-200 px-3 py-1 m-1 rounded">
-      BRAND
-     </button>
-     <button class="bg-gray-200 px-3 py-1 m-1 rounded">
-      PRICE
-     </button>
-     <button class="bg-gray-200 px-3 py-1 m-1 rounded">
-      MODEL
-     </button>
-     <button class="bg-gray-200 px-3 py-1 m-1 rounded">
-      SEATER
-     </button>
-     <button class="text-blue-500 px-3 py-1 m-1">
-      Clear all
-     </button>
+    <div class="absolute top-10 left-3 flex items-center space-x-1">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Brunei.svg" alt="Brunei Flag" class="w-4 h-3">
+      <span class="text-white text-sm">BND</span>
     </div>
-   </div>
-   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div class="bg-white p-4 rounded shadow-md">
-     <img alt="Toyota Fortuner" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/irtemUvUc-_dBMPXid3ryzWcsYKM5fW2DNi4NqAuEo8.jpg" width="150"/>
-     <h4 class="text-center">
-      Toyota Fortuner
-     </h4>
+    <img src="https://media.ed.edmunds-media.com/volkswagen/golf-gti/2024/oem/2024_volkswagen_golf-gti_4dr-hatchback_380-autobahn_fq_oem_1_1600.jpg" 
+         alt="Volkswagen Golf GTI" 
+         class="w-full h-[230px] object-cover">
+    <h1 class="absolute top-9 w-full text-center text-white autohub-title">AutoHub</h1>
+    <p class="absolute top-[188px] left-4 text-white text-[30px]" style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
+      Find your next car.
+    </p>
+  </div>
+
+  <!-- Filter + Search -->
+  <div class="px-4 pt-4">
+    <div class="flex justify-end mb-2">
+      <button class="flex items-center gap-1 bg-[#d9d9d9] rounded-full px-4 py-1 shadow text-sm" style="font-family: 'Poppins', sans-serif; font-weight: 700;">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/012/174/332/small/simple-magnifying-icon-png.png" alt="Search" class="w-4 h-4"> SEARCH
+      </button>
     </div>
-    <div class="bg-white p-4 rounded shadow-md">
-     <img alt="Hyundai Elantra" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/BEG5zn2S4ATaJExmTdvPAxz-8U8BrVt9dYnpClnusys.jpg" width="150"/>
-     <h4 class="text-center">
-      Hyundai Elantra
-     </h4>
+    <div class="flex flex-wrap justify-center items-center gap-2 text-[11px]" style="font-family: 'Raleway', sans-serif;">
+      <span class="font-semibold">BROWSE:</span>
+      <button class="bg-gray-300 px-3 py-1 rounded shadow">BRAND</button>
+      <button class="bg-gray-300 px-3 py-1 rounded shadow">PRICE</button>
+      <button class="bg-gray-300 px-3 py-1 rounded shadow">MODEL</button>
+      <button class="bg-gray-300 px-3 py-1 rounded shadow">SEATER</button>
     </div>
-    <div class="bg-white p-4 rounded shadow-md">
-     <img alt="Kia Sorento" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/kt5oMtxD0fqbQbeYIbl8eoajsVi5DzIm-DttHaAkrcU.jpg" width="150"/>
-     <h4 class="text-center">
-      Kia Sorento
-     </h4>
+    <div class="text-right mt-1">
+      <a href="#" class="text-xs text-gray-700 font-semibold">Clear all</a>
     </div>
-    <div class="bg-white p-4 rounded shadow-md">
-     <img alt="Kia K5" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/lGqE9uLFA7E9IiLHg8TLYRMr5SWFi4m_iQ58hQ4S2jo.jpg" width="150"/>
-     <h4 class="text-center">
-      Kia K5
-     </h4>
+  </div>
+
+  <!-- Car Grid (Vertical scroll) -->
+  <div class="px-4 py-6">
+    <div class="grid grid-cols-2 gap-4">
+      <!-- Car Cards with proper Raleway font -->
+      <div class="bg-[#d9d9d9] rounded shadow p-2 text-center">
+        <img src="https://newtpm.s3-ap-southeast-1.amazonaws.com/vehicles/colors/img_32_1104_attitude_black_mica.png" class="h-24 mx-auto object-contain" />
+        <p class="text-sm mt-1" style="font-family: 'Raleway', sans-serif;">Toyota Fortuner</p>
+      </div>
+      <div class="bg-[#d9d9d9] rounded shadow p-2 text-center">
+        <img src="https://s7d1.scene7.com/is/image/hyundai/2024-elantra-limited-ultimate-red-vehicle-browse-hero:16-9?wid=640&hei=360&fmt=webp-alpha" class="h-24 mx-auto object-contain" />
+        <p class="text-sm mt-1" style="font-family: 'Raleway', sans-serif;">Hyundai Elantra</p>
+      </div>
+      <div class="bg-[#d9d9d9] rounded shadow p-2 text-center">
+        <img src="https://inv.assets.sincrod.com/ChromeColorMatch/us/TRANSPARENT_cc_2025KIS100021_01_1280_M4B.png" class="h-24 mx-auto object-contain" />
+        <p class="text-sm mt-1" style="font-family: 'Raleway', sans-serif;">Kia Sorento</p>
+      </div>
+      <div class="bg-[#d9d9d9] rounded shadow p-2 text-center">
+        <img src="https://www.motortrend.com/uploads/sites/10/2021/08/2022-kia-k5-ex-sedan-angular-front.png" class="h-24 mx-auto object-contain" />
+        <p class="text-sm mt-1" style="font-family: 'Raleway', sans-serif;">Kia K5</p>
+      </div>
+      <div class="bg-[#d9d9d9] rounded shadow p-2 text-center">
+        <img src="https://pngimg.com/d/jimny_PNG9.png" class="h-24 mx-auto object-contain" />
+        <p class="text-sm mt-1" style="font-family: 'Raleway', sans-serif;">Suzuki Jimny</p>
+      </div>
+      <div class="bg-[#d9d9d9] rounded shadow p-2 text-center">
+        <img src="https://pngimg.com/d/mazda_PNG133.png" class="h-24 mx-auto object-contain" />
+        <p class="text-sm mt-1" style="font-family: 'Raleway', sans-serif;">Mazda MX - 5</p>
+      </div>
+      <div class="bg-[#d9d9d9] rounded shadow p-2 text-center">
+        <img src="https://www.motortrend.com/uploads/sites/10/2019/09/2019-porsche-718-boxster-convertible-angular-front.png?w=768&width=768&q=75&format=webp" class="h-24 mx-auto object-contain" />
+        <p class="text-sm mt-1" style="font-family: 'Raleway', sans-serif;">Porsche 718 Boxster</p>
+      </div>
+      <div class="bg-[#d9d9d9] rounded shadow p-2 text-center">
+        <img src="https://di-uploads-pod19.dealerinspire.com/hendricktoyotaconcord/uploads/2022/09/trim-2023-gr86.png" class="h-24 mx-auto object-contain" />
+        <p class="text-sm mt-1" style="font-family: 'Raleway', sans-serif;">Toyota GR86</p>
+      </div>
     </div>
-    <div class="bg-white p-4 rounded shadow-md">
-     <img alt="Suzuki Jimny" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/r3MtDJxZNF7XyUet3DsX4-DvsNbfjc3TkXTaVbHalng.jpg" width="150"/>
-     <h4 class="text-center">
-      Suzuki Jimny
-     </h4>
+
+    <!-- Back to Main -->
+    <div class="text-right mt-6">
+      <a href="index.html" class="text-xs text-blue-600 font-semibold">Back to Main</a>
     </div>
-    <div class="bg-white p-4 rounded shadow-md">
-     <img alt="Mazda MX-5" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/i5tzm4YFlZmj_ofiHcmK7ud0q9lra2SWhFVtXN1QUlQ.jpg" width="150"/>
-     <h4 class="text-center">
-      Mazda MX-5
-     </h4>
-    </div>
-    <div class="bg-white p-4 rounded shadow-md">
-     <img alt="Porsche 718 Boxster" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/35VaKgAR55xIL29mwphHSe1NZIKV6VEQ566zNRphLAI.jpg" width="150"/>
-     <h4 class="text-center">
-      Porsche 718 Boxster
-     </h4>
-    </div>
-    <div class="bg-white p-4 rounded shadow-md">
-     <img alt="Toyota GR86" class="w-full h-32 object-cover mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/V34yos6r-fukDZpiKb_g_4PjNzJXmcefLi6IReK-CZo.jpg" width="150"/>
-     <h4 class="text-center">
-      Toyota GR86
-     </h4>
-    </div>
-   </div>
-  </main>
- </body>
+  </div>
+
+</body>
 </html>
