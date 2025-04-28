@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Search Results</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #d1d5db 100%);
+      min-height: 100vh;
+    }
+
+    /* Add blur effect to the background */
+    .blur-background {
+      filter: blur(5px);
+    }
+
+    /* Extra transition for the popup itself */
+    .popup-content {
+      transform: scale(0.9);
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+    .popup-content.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .blur-dark {
+    filter: blur(5px) brightness(0.7); /* Blur + darken */
+    transition: all 0.3s ease-in-out;
+  }
+
+  .fade-in {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-out.hide {
+  opacity: 0;
+}
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4">
+  <!-- Sidebar (hidden by default) -->
+<div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-[#343434] text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 p-6">
+
+
+  <div class="absolute top-4 left-4">
+      <button id="closeSidebar" aria-label="Close" class="text-gray-400 hover:text-gray-200">
+          <i class="fas fa-arrow-left text-white"></i>
+      </button>
+  </div>
+  <div class="ml-12 mt-12">
+      <h1 class="text-3xl font-bold mb-10">AutoHub</h1>
+      <nav class="space-y-6">
+          <a href="#" class="block text-white">HOME</a>
+          <a href="#" class="block text-white">SUV</a>
+          <a href="#" class="block text-white">MPV</a>
+          <a href="#" class="block text-white">HATCHBACK</a>
+          <a href="#" class="block text-white">SEDAN</a>
+          <a href="#" class="block text-white">COUPE</a>
+          <a href="#" class="block text-white">LUXURY</a>
+          <a href="#" class="block text-white">SPORT</a>
+      </nav>
+      <div class="space-y-4 mt-10">
+          <a href="#" class="flex items-center space-x-2">
+              <i class="fas fa-info-circle"></i>
+              <span>About</span>
+          </a>
+          <a href="#" class="flex items-center space-x-2">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Log out</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="w-full max-w-md">
+    <header class="flex justify-between items-center mb-4">
+      <button id="sidebarToggle" aria-label="Menu" class="text-black text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+      <button aria-label="User Account" class="text-black text-2xl">
+        <i class="fas fa-user"></i>
+      </button>
+    </header>
+    <main>
+      <h1 class="text-gray-600 text-2xl mb-3 font-normal text-center">
+        Search results for
+        <span id="searchTerm" class="font-semibold">“{{ query }}”</span>
+      </h1>
+      <form class="mb-2 relative">
+        <input
+          aria-label="Search input"
+          class="w-full rounded-md bg-gray-300 text-gray-700 px-3 py-2 pr-10 text-base placeholder-gray-600 focus:outline-none"
+          type="text"
+          value="{{ query }}"
+        />
+        <button
+          aria-label="Search"
+          class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-700"
+          type="submit"
+        >
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+      <div class="flex justify-end mb-3 items-center space-x-1">
+        <label class="text-xs text-gray-700" for="sortTrigger">Sort :</label>
+        <div id="sortTrigger" class="text-xs border border-gray-400 rounded px-2 py-1 cursor-pointer bg-gray-300">
+          Reference
+        </div>
+      </div>
+      <section class="space-y-5">
+        <!-- Card 1 -->
+        <article
+          class="bg-gray-300 rounded-md border border-black p-4 flex flex-col sm:flex-row sm:items-center"
+        >
+          <div class="flex items-center space-x-4 flex-1">
+            <img
+              alt=""
+              class=""
+              height="80"
+              src="https://imgbb.com/"><img src="https://i.ibb.co/kgKFVKD0/Picture1.png"
+              width="120"
+            />
+            <div class="flex flex-col">
+              <p class="font-extrabold text-black text-sm max-w-[130px]">
+                Toyota Raize 2021
+              </p>
+              <div
+                class="flex flex-col space-y-2 text-xs text-gray-800 sm:text-sm mt-2"
+              >
+                <span
+                  class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap"
+                  >$33,183</span
+                >
+                <span
+                  class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap"
+                  >1.0L 3-cyl, Petrol, Aut..</span
+                >
+                <span
+                  class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap"
+                  >5 Seater</span
+                >
+              </div>
+            </div>
+          </div>
+          <a
+            class="text-xs text-blue-600 mt-3 sm:mt-0 ml-auto"
+            href="#"
+            >More Details</a
+          >
+        </article>
+        <!-- Card 2 -->
+        <article
+          class="bg-gray-300 rounded-md border border-black p-4 flex flex-col sm:flex-row sm:items-center"
+        >
+          <div class="flex items-center space-x-4 flex-1">
+            <img
+              alt="Toyota GR86 2021"
+              class=""
+              height="80"
+              src="https://i.ibb.co/zCXByMJ/Rectangle-36.png"
+              width="120"
+            />
+            <div class="flex flex-col">
+              <p class="font-extrabold text-black text-sm max-w-[130px]">
+                Toyota GR86 2021
+              </p>
+              <div
+                class="flex flex-col space-y-2 text-xs text-gray-800 sm:text-sm mt-2"
+              >
+                <span
+                  class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap"
+                  >$55,613</span
+                >
+                <span
+                  class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap"
+                  >2.4L 4-cyl, Petrol, Aut..</span
+                >
+                <span
+                  class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap"
+                  >4 Seater</span
+                >
+              </div>
+            </div>
+          </div>
+          <a
+            class="text-xs text-blue-600 mt-3 sm:mt-0 ml-auto"
+            href="#"
+            >More Details</a
+          >
+        </article>
+        <!-- Card 3 -->
+        <article
+          class="bg-gray-300 rounded-md border border-black p-4 flex flex-col sm:flex-row sm:items-center"
+        >
+          <div class="flex items-center space-x-4 flex-1">
+            <img
+              alt="Toyota Land Cruiser 250 Prado TX 2025"
+              class=""
+              height="80"
+              src="https://i.ibb.co/hx6jjSG9/Rectangle-37.png"
+              width="120"
+            />
+            <div class="flex flex-col">
+              <p class="font-extrabold text-black text-sm max-w-[130px]">
+                Toyota Land Cruiser 250 Prado TX 2025
+              </p>
+              <div
+                class="flex flex-col space-y-2 text-xs text-gray-800 sm:text-sm mt-2"
+              >
+                <span
+                  class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap"
+                  >$98,808</span
+                >
+                <span
+                  class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap"
+                  >2.8L 4 Cylinder, Diesel</span
+                >
+                <span
+                  class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap"
+                  >7 Seater</span
+                >
+              </div>
+            </div>
+          </div>
+          <a
+            class="text-xs text-blue-600 mt-3 sm:mt-0 ml-auto"
+            href="#"
+            >More Details</a
+          >
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <!-- Sort Filter Pop-up -->
+  <div id="sortPopup" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-center justify-center z-50 hidden fade-in">
+  <div class="popup-content bg-gray-200 rounded-lg p-6 w-[90%] max-w-sm relative space-y-4">
+    <button id="closeSortPopup" class="absolute top-2 right-2 text-xl text-gray-800 font-bold">&times;</button>
+
+    <!-- PRICE Section -->
+<div>
+  <h2 id="togglePrice" class="text-black font-semibold cursor-pointer flex justify-between items-center">
+    PRICE
+    <span id="arrowPrice">▼</span>
+  </h2>
+  <ul id="priceOptions" class="ml-6 mt-2 space-y-1 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+    <li class="cursor-pointer hover:text-blue-600 list-disc">HIGHER TO LOW</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">LOW TO HIGHER</li>
+  </ul>
+</div>
+
+    <!-- SEAT Section -->
+<div>
+  <h2 id="toggleSeat" class="text-black font-semibold cursor-pointer flex justify-between items-center">
+    SEAT
+    <span id="arrowSeat">▼</span>
+  </h2>
+  <ul id="seatOptions" class="ml-6 mt-2 space-y-1 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+    <li class="cursor-pointer hover:text-blue-600 list-disc">2 Seater</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">3 Seater</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">5 Seater</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">7 Seater</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">9 Seater</li>
+  </ul>
+</div>
+
+<!-- PERFORMANCE Section -->
+<div>
+  <h2 id="togglePerformance" class="text-black font-semibold cursor-pointer flex justify-between items-center">
+    PERFORMANCE
+    <span id="arrowPerformance">▼</span>
+  </h2>
+  <ul id="performanceOptions" class="ml-6 mt-2 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+    <!-- Empty for now, but still expandable -->
+  </ul>
+</div>
+
+<!-- MODEL Section -->
+<div>
+  <h2 id="toggleModel" class="text-black font-semibold cursor-pointer flex justify-between items-center">
+    MODEL
+    <span id="arrowModel">▼</span>
+  </h2>
+  <ul id="modelOptions" class="ml-6 mt-2 space-y-1 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+    <li class="cursor-pointer hover:text-blue-600 list-disc">SUV</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">MPV</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">HATCHBACK</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">SEDAN</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">COUPE</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">LUXURY</li>
+    <li class="cursor-pointer hover:text-blue-600 list-disc">SPORT</li>
+  </ul>
+</div>
+
+  </div>
+</div>
+
+
+  <script>
+   document.addEventListener('DOMContentLoaded', function () {
+  const sortTrigger = document.getElementById('sortTrigger');
+  const popup = document.getElementById('sortPopup');
+  const popupContent = document.querySelector('.popup-content');
+  const mainContent = document.getElementById('mainContent');
+  const closeBtn = document.getElementById('closeSortPopup');
+  const searchInput = document.querySelector('input[type="text"]');
+  const searchButton = document.querySelector('button[type="submit"]');
+
+
+ // Sort filter expand/collapse with arrow
+const toggleSections = [
+  { headerId: 'togglePrice', contentId: 'priceOptions', arrowId: 'arrowPrice' },
+  { headerId: 'toggleSeat', contentId: 'seatOptions', arrowId: 'arrowSeat' },
+  { headerId: 'togglePerformance', contentId: 'performanceOptions', arrowId: 'arrowPerformance' },
+  { headerId: 'toggleModel', contentId: 'modelOptions', arrowId: 'arrowModel' }
+];
+
+toggleSections.forEach(section => {
+  const header = document.getElementById(section.headerId);
+  const content = document.getElementById(section.contentId);
+  const arrow = document.getElementById(section.arrowId);
+
+  header.addEventListener('click', () => {
+    if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+      content.style.maxHeight = "0px";
+      arrow.textContent = "▼"; // collapsed
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      arrow.textContent = "▲"; // expanded
+    }
+  });
+});
+
+
+
+  // Sidebar toggling
+const sidebar = document.getElementById('sidebar');
+const toggleButton = document.getElementById('sidebarToggle');
+const closeButton = document.getElementById('closeSidebar');
+
+toggleButton.addEventListener('click', () => {
+    sidebar.classList.toggle('-translate-x-full');
+    mainContent.classList.add('blur-dark'); // Blur and darken the main content
+});
+
+closeButton.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');
+    mainContent.classList.remove('blur-dark'); // Remove blur-dark when closing
+});
+
+
+
+  // Set the search term from URL
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get('query') || "Toyota"; // default if empty
+
+  document.getElementById('searchTerm').textContent = `“${query}”`;
+  if (searchInput) {
+    searchInput.value = query;
+  }
+
+  // Search button behavior
+  function handleSearch(event) {
+    event.preventDefault(); // stop form submit
+    const newQuery = searchInput.value.trim();
+    if (newQuery.length > 0) {
+      window.location.href = `/result/?query=${encodeURIComponent(newQuery)}`;
+    } else {
+      alert("Please enter something to search.");
+    }
+  }
+
+  searchButton.addEventListener('click', handleSearch);
+
+  searchInput.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      handleSearch(event);
+    }
+
+  
+
+  });
+
+  // Sort popup behavior
+  sortTrigger.addEventListener('click', () => {
+  popup.classList.remove('hidden');
+  setTimeout(() => {
+    popup.classList.add('show');
+  }, 10); // Small delay to trigger fade-in
+  popupContent.classList.add('show');
+  mainContent.classList.add('blur-background');
+});
+
+  closeBtn.addEventListener('click', () => {
+    popupContent.classList.remove('show');
+    popup.classList.remove('show');
+    setTimeout(() => {
+      popup.classList.add('hidden');
+    }, 300); // Wait for fade-out to finish
+    mainContent.classList.remove('blur-background');
+  });
+
+});
+  </script>
+</body>
+</html>
