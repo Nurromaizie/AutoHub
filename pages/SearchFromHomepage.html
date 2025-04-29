@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AutoHub</title>
+
+  <!-- TailwindCSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400&family=Montserrat:wght@300&family=Poppins:wght@700&family=Raleway&display=swap" rel="stylesheet">
+
   <style>
     body {
       max-width: 430px;
@@ -15,6 +20,48 @@
     .autohub-title {
       font-family: 'Exo 2', sans-serif;
       font-size: 24px;
+      font-weight: bold;
+    }
+    /* Modal overlay */
+    #searchModal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    #searchModal .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 90%;
+      width: 300px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    /* Search results */
+    #searchResults div {
+      padding: 10px 0;
+      cursor: pointer;
+    }
+    #searchResults div:hover {
+      background-color: #f0f0f0;
     }
   </style>
 </head>
@@ -32,23 +79,17 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Brunei.svg" alt="Brunei Flag" class="w-4 h-3">
       <span class="text-white text-sm">BND</span>
     </div>
-    <img src="https://media.ed.edmunds-media.com/volkswagen/golf-gti/2024/oem/2024_volkswagen_golf-gti_4dr-hatchback_380-autobahn_fq_oem_1_1600.jpg" 
-         alt="Volkswagen Golf GTI" 
-         class="w-full h-[230px] object-cover">
+    <img src="https://media.ed.edmunds-media.com/volkswagen/golf-gti/2024/oem/2024_volkswagen_golf-gti_4dr-hatchback_380-autobahn_fq_oem_1_1600.jpg" alt="Volkswagen Golf GTI" class="w-full h-[230px] object-cover">
     <h1 class="absolute top-9 w-full text-center text-white autohub-title">AutoHub</h1>
-    <p class="absolute top-[188px] left-4 text-white text-[30px]" style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
-      Find your next car.
-    </p>
+    <p class="absolute top-[188px] left-4 text-white text-[30px]" style="font-family: 'Montserrat', sans-serif; font-weight: 300;">Find your next car.</p>
   </div>
 
-  <!-- Overlay (Blur background effect) -->
-  <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-20"></div>
-
-  <!-- Filter + Search -->
-  <div class="px-4 pt-4">
+  <!-- Filter + Search Section -->
+  <div class="px-4 pt-4 relative z-20">
     <div class="flex justify-end mb-2">
-      <button class="flex items-center gap-1 bg-[#d9d9d9] rounded-full px-4 py-1 shadow text-sm" style="font-family: 'Poppins', sans-serif; font-weight: 700;">
-        <img src="https://static.vecteezy.com/system/resources/thumbnails/012/174/332/small/simple-magnifying-icon-png.png" alt="Search" class="w-4 h-4"> SEARCH
+      <button id="openModal" class="flex items-center gap-1 bg-[#d9d9d9] rounded-full px-4 py-1 shadow text-sm font-bold" style="font-family: 'Poppins', sans-serif;">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/012/174/332/small/simple-magnifying-icon-png.png" alt="Search" class="w-4 h-4">
+        SEARCH
       </button>
     </div>
     <div class="flex flex-wrap justify-center items-center gap-2 text-[11px]" style="font-family: 'Raleway', sans-serif;">
@@ -63,8 +104,8 @@
     </div>
   </div>
 
-  <!-- Scrollable Car Cards in 5x2 Style -->
-  <div class="px-4 pt-6">
+ <!-- Scrollable Car Cards in 5x2 Style -->
+ <div class="px-4 pt-6">
     <div class="relative">
       <div class="overflow-x-auto overflow-y-hidden pb-4">
         <div class="grid grid-rows-2 grid-flow-col auto-cols-max gap-4">
@@ -117,9 +158,9 @@
     </div>
   </div>
 
-  <!-- Top 3 Latest Favorite Cars -->
+  <!-- Favorite Cars Section -->
   <div class="px-4 py-6">
-    <h2 class="text-center text-sm font-bold mb-4" style="font-family: 'Poppins', sans-serif; font-weight: 700;">Top 3 Latest Favorite Cars</h2>
+    <h2 class="text-center text-sm font-bold mb-4" style="font-family: 'Poppins', sans-serif;">Top 3 Latest Favorite Cars</h2>
     <div class="relative">
       <div id="carousel" class="snap-x snap-mandatory overflow-x-auto flex space-x-4 pb-2 scroll-smooth">
         <div class="flex-shrink-0 snap-center w-full text-center">
@@ -147,7 +188,73 @@
     </div>
   </div>
 
+  <!-- Search Modal -->
+  <div id="searchModal">
+    <div class="modal-content flex flex-col space-y-2">
+      <div class="relative">
+        <input type="text" id="searchInput" class="modal-input pr-10" placeholder="Search..." />
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/012/174/332/small/simple-magnifying-icon-png.png" class="w-4 h-4 absolute top-4 right-4 opacity-60" />
+      </div>
+      <div id="searchResults" class="flex flex-col divide-y divide-gray-300 text-gray-700 text-sm" style="font-family: 'Raleway', sans-serif;">
+        <!-- Dynamic Search Results -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script>
+    const modal = document.getElementById("searchModal");
+    const openBtn = document.getElementById("openModal");
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
+
+    const cars = [
+      "Hyundai H1",
+      "Hyundai Elantra",
+      "Hyundai i30 N",
+      "Hyundai Kona",
+      "Hyundai Stargazer",
+      "Kia K5",
+      "Kia Cerato",
+      "Kia Sportage",
+      "Kia Carnival",
+      "Kia Seltos",
+      "Toyota Raize",
+      "Toyota Fortuner",
+      "Toyota GR86",
+      "Toyota Vios",
+      "Toyota Yaris"
+    ];
+
+    openBtn.addEventListener("click", () => {
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      searchInput.focus();
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+      }
+    });
+
+    searchInput.addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase();
+      searchResults.innerHTML = "";
+
+      if (query.trim() === "") return;
+
+      const filtered = cars.filter(car => car.toLowerCase().includes(query));
+
+      filtered.forEach(car => {
+        const div = document.createElement("div");
+        div.textContent = car;
+        searchResults.appendChild(div);
+      });
+    });
+
+    // Carousel Auto Scroll
     const carousel = document.getElementById('carousel');
     let index = 0;
     setInterval(() => {
