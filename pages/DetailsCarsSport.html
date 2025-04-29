@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Details of Sports cars</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <style>
+    .blur-dark {
+      filter: blur(5px) brightness(0.7);
+      transition: all 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-white to-gray-300 min-h-screen">
+
+<!-- SIDEBAR -->
+<div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-[#343434] text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 p-6">
+  <div class="absolute top-4 left-4">
+    <button id="closeSidebar" aria-label="Close" class="text-gray-400 hover:text-gray-200">
+      <i class="fas fa-arrow-left text-white"></i>
+    </button>
+  </div>
+  <div class="ml-12 mt-12">
+    <h1 class="text-3xl font-bold mb-10">AutoHub</h1>
+    <nav class="space-y-6">
+      <a href="index.html" class="block text-white">HOME</a>
+      <a href="suv.html" class="block text-white">SUV</a>
+      <a href="mpv.html" class="block text-white">MPV</a>
+      <a href="sedan.html" class="block text-white">SEDAN</a>
+      <a href="sport.html" class="block text-white">SPORT</a>
+    </nav>
+    <div class="space-y-4 mt-10">
+      <a href="#" class="flex items-center space-x-2">
+        <i class="fas fa-info-circle"></i><span>About</span>
+      </a>
+      <a href="#" class="flex items-center space-x-2">
+        <i class="fas fa-sign-out-alt"></i><span>Log out</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Content Wrapper -->
+<div id="contentWrapper">
+  <!-- Top Navbar -->
+  <div class="flex justify-between items-center px-4 py-4">
+    <button id="sidebarToggle"><img src="https://i.ibb.co/ytXtF7Y/menu.png" alt="Menu" class="w-6 h-6"></button>
+    <div class="flex gap-4">
+      <button><img src="https://i.ibb.co/d489N1xY/image-27.png" alt="Profile" class="w-6 h-6"></button>
+      <button><img src="https://i.ibb.co/N2X0BD7S/search.png" alt="Search" class="w-6 h-6"></button>
+    </div>
+  </div>
+
+  <!-- Car Slider Container -->
+  <div class="relative w-full overflow-hidden max-w-[430px] mx-auto">
+    <div id="carSlides" class="flex transition-transform duration-500 ease-in-out">
+
+      <!-- Slide 1: Porsche 718 Boxter -->
+      <div class="min-w-full flex flex-col items-center mt-16">
+        <img src="https://i.ibb.co/PsWys6sr/image.png" alt="Porsche 718 Boxter" class="w-64">
+        <h1 class="text-2xl mt-4 text-gray-800 font-medium">Porsche 718 Boxter</h1>
+        <div class="grid grid-cols-2 gap-y-6 px-6 py-8 text-center text-gray-600 font-light text-sm">
+          <div><p class="text-xs">Engine</p><p class="font-semibold">D-4S</p></div>
+          <div><p class="text-xs">Transmission</p><p class="font-semibold">Automatic OR Manual</p></div>
+          <div><p class="text-xs">Year</p><p class="font-semibold">2025</p></div>
+          <div><p class="text-xs">Fuel Type</p><p class="font-semibold">Petrol</p></div>
+          <div><p class="text-xs">Color</p><p class="font-semibold">Crystal White Pearl<br>(K1X)</p></div>
+          <div><p class="text-xs">No. of Seats</p><p class="font-semibold">4 Seater</p></div>
+          <div><p class="text-xs">Body Type</p><p class="font-semibold">Sport</p></div>
+        </div>
+        <div class="flex justify-end w-full px-6 pb-6">
+          <button class="flex items-center gap-1 text-sm text-blue-500">
+            <i class="fas fa-share"></i>
+            Share
+          </button>
+        </div>
+      </div>
+
+      <!-- Slide 2: Toyota GR86 -->
+      <div class="min-w-full flex flex-col items-center">
+        <img src="https://i.ibb.co/Y7LSqJJG/Rectangle-36.png" alt="Toyota GR86" class="w-64">
+        <h1 class="text-2xl mt-4 text-gray-800 font-medium">Toyota GR86</h1>
+        <div class="grid grid-cols-2 gap-y-6 px-6 py-8 text-center text-gray-600 font-light text-sm">
+          <div><p class="text-xs">Engine</p><p class="font-semibold">D-4S</p></div>
+          <div><p class="text-xs">Transmission</p><p class="font-semibold">Automatic OR Manual</p></div>
+          <div><p class="text-xs">Year</p><p class="font-semibold">2025</p></div>
+          <div><p class="text-xs">Fuel Type</p><p class="font-semibold">Petrol</p></div>
+          <div><p class="text-xs">Color</p><p class="font-semibold">Crystal White Pearl<br>(K1X)</p></div>
+          <div><p class="text-xs">No. of Seats</p><p class="font-semibold">4 Seater</p></div>
+          <div><p class="text-xs">Body Type</p><p class="font-semibold">Sport</p></div>
+        </div>
+        <div class="flex justify-end w-full px-6 pb-6">
+          <button class="flex items-center gap-1 text-sm text-blue-500">
+            <i class="fas fa-share"></i>
+            Share
+          </button>
+        </div>
+      </div>
+
+      <!-- Slide 3: Mazda MX-5 -->
+      <div class="min-w-full flex flex-col items-center mt-20">
+        <img src="https://i.ibb.co/gZzrCBc3/Mazda-MX-5-Miata-Transparent-Background-2.png" alt="Mazda MX-5" class="w-64">
+        <h1 class="text-2xl mt-4 text-gray-800 font-medium">Mazda MX-5</h1>
+        <div class="grid grid-cols-2 gap-y-6 px-6 py-8 text-center text-gray-600 font-light text-sm">
+          <div><p class="text-xs">Engine</p><p class="font-semibold">D-4S</p></div>
+          <div><p class="text-xs">Transmission</p><p class="font-semibold">Automatic OR Manual</p></div>
+          <div><p class="text-xs">Year</p><p class="font-semibold">2025</p></div>
+          <div><p class="text-xs">Fuel Type</p><p class="font-semibold">Petrol</p></div>
+          <div><p class="text-xs">Color</p><p class="font-semibold">Crystal White Pearl<br>(K1X)</p></div>
+          <div><p class="text-xs">No. of Seats</p><p class="font-semibold">4 Seater</p></div>
+          <div><p class="text-xs">Body Type</p><p class="font-semibold">Sport</p></div>
+        </div>
+        <div class="flex justify-end w-full px-6 pb-6">
+          <button class="flex items-center gap-1 text-sm text-blue-500">
+            <i class="fas fa-share"></i>
+            Share
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrows -->
+    <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 text-2xl text-gray-500 z-10">&#10094;</button>
+    <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 text-2xl text-gray-500 z-10">&#10095;</button>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const carSlides = document.getElementById('carSlides');
+    const totalSlides = carSlides.children.length;
+    let currentIndex = 0;
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlide();
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlide();
+    });
+
+    function updateSlide() {
+      const offset = -currentIndex * 100;
+      carSlides.style.transform = `translateX(${offset}%)`;
+    }
+
+    // Sidebar toggle
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('contentWrapper');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const closeSidebar = document.getElementById('closeSidebar');
+
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+      mainContent.classList.add('blur-dark');
+    });
+
+    closeSidebar.addEventListener('click', () => {
+      sidebar.classList.add('-translate-x-full');
+      mainContent.classList.remove('blur-dark');
+    });
+  </script>
+</body>
+</html>
