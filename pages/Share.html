@@ -104,20 +104,18 @@
 
     <!-- Bottom Panel (Animated) -->
     <div class="absolute bottom-0 left-0 w-full bg-white p-6 rounded-t-2xl z-30 fade-slide-up">
-      <div class="text-center mb-5 font-semibold text-black" style="font-family: 'Raleway', sans-serif;">Send to</div>
+      <div class="text-center mb-4 font-semibold text-black" style="font-family: 'Raleway', sans-serif;">Send to</div>
       <div class="flex justify-center gap-10">
         
         <!-- Copy Link Button -->
         <div class="flex flex-col items-center">
-          <button class="flex flex-col items-center justify-center w-20 h-20 bg-gray-100 rounded-full hover:bg-gray-200 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <!-- Example Link Icon -->
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-1.414 1.414a4 4 0 105.656 5.656l1.414-1.414M10.172 13.828a4 4 0 005.656 0l1.414-1.414a4 4 0 00-5.656-5.656l-1.414 1.414" />
+          <div class="bg-gray-300 p-4 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-1.414 1.414a4 4 0 105.656 5.656l1.414-1.414M10.172 13.828a4 4 0 005.656 0l1.414-1.414a4 4 0 00-5.656-5.656l-1.414 1.414" />
             </svg>
-            <span class="text-sm text-gray-700">Copy Link</span>
-          </button>
+          </div>
+          <p class="mt-2 text-xs text-black" style="font-family: 'Montserrat', sans-serif;">Copy Link</p>
         </div>
-
         <!-- Add to Favorite Button -->
         <div class="flex flex-col items-center">
           <div class="bg-gray-300 p-4 rounded-full">
@@ -127,7 +125,6 @@
           </div>
           <p class="mt-2 text-xs text-black" style="font-family: 'Montserrat', sans-serif;">Add to favorite</p>
         </div>
-
       </div>
 
       <!-- Close Button -->
