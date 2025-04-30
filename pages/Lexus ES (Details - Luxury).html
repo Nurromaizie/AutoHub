@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lexus ES - AutoHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      max-width: 430px;
+      margin: 0 auto;
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-white to-gray-300 flex flex-col items-center justify-between text-center px-4">
+
+    <!-- Sidebar -->
+ <!-- Overlay -->
+<div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm z-40 hidden"></div>
+<!-- SIDEBAR -->
+<div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-[#343434] text-white text-left transform -translate-x-full transition-transform duration-300 ease-in-out z-50 p-6">
+  <div class="absolute top-4 left-4">
+    <button id="closeSidebar" aria-label="Close" class="text-gray-400 hover:text-gray-200">
+      <i class="fas fa-arrow-left text-white"></i>
+    </button>
+  </div>
+  <div class="pl-4 mt-12">
+    <h1 class="text-3xl font-bold mb-10">AutoHub</h1>
+    <nav class="space-y-6">
+      <a href="#" class="block text-white">HOME</a>
+      <a href="#" class="block text-white">SUV</a>
+      <a href="#" class="block text-white">MPV</a>
+      <a href="#" class="block text-white">HATCHBACK</a>
+      <a href="#" class="block text-white">SEDAN</a>
+      <a href="#" class="block text-white">COUPE</a>
+      <a href="#" class="block text-white">LUXURY</a>
+      <a href="#" class="block text-white">SPORT</a>
+    </nav>
+    <div class="space-y-4 mt-10">
+      <a href="{% url 'about' %}" class="flex items-center space-x-2">
+        <i class="fas fa-info-circle"></i><span>About</span>
+      </a>
+      <a href="#" class="flex items-center space-x-2">
+        <i class="fas fa-sign-out-alt"></i><span>Log out</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+    <!-- HEADER: absolute top nav icons -->
+    <div class="absolute top-4 left-4">
+      <button id="sidebarToggle" aria-label="Menu">
+        <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>    
+    <div class="absolute top-4 right-4 flex gap-4">
+      <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+      <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </div>
+  
+    <main class="flex-grow flex flex-col justify-center items-center mt-2">
+
+        <!-- Car Image (slightly higher) -->
+        <img src="https://i.ibb.co/d4pCDHMc/image.png"
+             alt="Lexus ES"
+             class="h-56 object-contain mb-3" />
+      
+        <!-- Title -->
+        <h1 class="text-2xl text-gray-700 font-light tracking-wide mb-4">Lexus ES</h1>
+      
+        <!-- Car Specs Grid (slightly higher) -->
+      <!-- Car Info Layout: 3–2–2 -->
+<div class="w-full px-6 mt-4 space-y-5 text-sm text-gray-600">
+
+    <!-- Row 1: 3 Columns -->
+    <div class="grid grid-cols-3 gap-x-6 text-center">
+      <div>
+        <p class="text-xs">Engine</p>
+        <p class="text-gray-900 font-semibold">D-CVVT</p>
+      </div>
+      <div>
+        <p class="text-xs">Transmission</p>
+        <p class="text-gray-900 font-semibold">7-Speed Automatic</p>
+      </div>
+      <div>
+        <p class="text-xs">Year</p>
+        <p class="text-gray-900 font-semibold">2025</p>
+      </div>
+    </div>
+  
+    <!-- Row 2: 2 Columns -->
+    <div class="grid grid-cols-2 gap-x-8 text-center">
+      <div>
+        <p class="text-xs">Fuel Type</p>
+        <p class="text-gray-900 font-semibold">Petrol</p>
+      </div>
+      <div>
+        <p class="text-xs">Color</p>
+        <p class="text-gray-900 font-semibold">Grey</p>
+      </div>
+    </div>
+  
+    <!-- Row 3: 2 Columns -->
+    <div class="grid grid-cols-2 gap-x-8 text-center">
+      <div>
+        <p class="text-xs">No. of Seats</p>
+        <p class="text-gray-900 font-semibold">5 Seater</p>
+      </div>
+      <div>
+        <p class="text-xs">Body Type</p>
+        <p class="text-gray-900 font-semibold">Luxury</p>
+      </div>
+    </div>
+  
+  </div>
+  
+      </main>
+      
+  
+<!-- Footer Buttons (Styled & Slightly Higher) -->
+<div class="w-full px-6 mt-12 mb-20 flex justify-between items-center text-sm text-blue-600">
+    <!-- Add Notes -->
+    <button onclick="toggleModal()" class="flex items-center gap-2">
+      <div class="w-5 h-5 flex items-center justify-center border border-blue-600 rounded-full">
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+      </div>
+      <span id="addNoteText" class="text-sm">Add Notes</span>
+    </button>
+  
+  <!-- Share (Updated iOS-style icon) -->
+<button onclick="window.location.href='Share.html'" class="flex items-center gap-2">
+    <div class="w-5 h-5 flex items-center justify-center border border-blue-600 rounded">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M16 6l-4-4m0 0L8 6m4-4v12" />
+      </svg>
+    </div>
+    <span class="text-sm">Share</span>
+  </button>
+  
+  
+  
+  
+  
+
+  <!-- Notes Modal -->
+  <div id="noteModal" class="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg p-4 w-80">
+      <textarea placeholder="Add a note..." class="w-full h-40 p-2 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"></textarea>
+      <div class="flex justify-end gap-2 mt-2 text-sm">
+        <button onclick="toggleModal()" class="px-3 py-1 rounded hover:underline">Cancel</button>
+        <button id="saveNoteBtn" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const modal = document.getElementById("noteModal");
+      const textarea = modal.querySelector("textarea");
+      const saveBtn = document.getElementById("saveNoteBtn");
+      const addNoteText = document.getElementById("addNoteText");
+  
+      // Load saved note from localStorage if any
+      let savedNote = localStorage.getItem("note") || "";
+      if (savedNote.trim() !== "") {
+        addNoteText.textContent = "Add Notes (1)";
+      }
+  
+      // Toggle modal visibility
+      window.toggleModal = function () {
+        if (!modal.classList.contains("hidden")) {
+          modal.classList.add("hidden");
+        } else {
+          textarea.value = savedNote;
+          modal.classList.remove("hidden");
+        }
+      };
+  
+      // Save note logic
+      saveBtn.addEventListener("click", function () {
+        savedNote = textarea.value.trim();
+        localStorage.setItem("note", savedNote);
+  
+        if (savedNote !== "") {
+          addNoteText.textContent = "Add Notes (1)";
+        } else {
+          addNoteText.textContent = "Add Notes";
+        }
+  
+        modal.classList.add("hidden");
+      });
+    });
+
+     // Sidebar functionality
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const closeSidebar = document.getElementById('closeSidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openSidebar() {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
+    }
+
+    function closeSidebarMenu() {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    }
+
+    sidebarToggle.addEventListener('click', openSidebar);
+    closeSidebar.addEventListener('click', closeSidebarMenu);
+    overlay.addEventListener('click', closeSidebarMenu);
+
+  </script>
+  
+  
+
+</body>
+</html>
