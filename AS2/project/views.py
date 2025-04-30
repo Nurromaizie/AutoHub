@@ -7,3 +7,5 @@ def viewallcars(request):
     return render(request, 'project/viewallcars.html')
 def profile(request):
     return render(request, 'project/profile.html')
+def sorento(request):
+    return render(request, 'project/sorento.html')
