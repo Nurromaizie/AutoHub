@@ -71,4 +71,15 @@
       </div>
     </div>
   </body>
+
+  <script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // prevent real form submission
+      const email = document.getElementById('email').value;
+      localStorage.setItem('userEmail', email);
+      window.location.href = 'Profile.html'; // redirect to profile
+    });
+  </script>
+  
 </html>

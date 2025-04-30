@@ -43,7 +43,7 @@
   <!-- Create Account Form -->
   <div class="bg-white/80 backdrop-blur-sm p-6 mx-4 mt-6 rounded-2xl shadow-xl border border-gray-300">
     <h2 class="text-center text-black font-normal mb-6 text-[15px]">CREATE ACCOUNT</h2>
-    <form class="space-y-4">
+    <form class="space-y-4" id="createAccountForm">
       <div>
         <label for="name" class="block text-sm font-normal text-black mb-1">Name</label>
         <input type="text" id="name" placeholder="Enter your Name"
@@ -72,5 +72,15 @@
       <a href="#">LOGIN</a>
     </div>
   </div>
+
+  <script>
+    const form = document.getElementById('createAccountForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      localStorage.setItem('userEmail', email);
+      window.location.href = 'Profile.html';
+    });
+  </script>
 </body>
 </html>
