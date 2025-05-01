@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,8 +250,64 @@ function copyLink() {
     console.error("Failed to copy: ", err);
   });
 }
+function addToFavorites() {
+  const carName = "KIA Sorento"; // You can change this dynamically if needed
+  const notification = document.getElementById("favoriteNotification");
 
+  // Retrieve existing favorites or initialize
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
+  // Prevent duplicates
+  if (!favorites.includes(carName)) {
+    favorites.push(carName);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
+
+  // Show notification
+  notification.classList.remove("opacity-0");
+  notification.classList.add("opacity-100");
+
+  // Hide after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove("opacity-100");
+    notification.classList.add("opacity-0");
+  }, 3000);
+}
+function isLoggedIn() {
+  return localStorage.getItem("isLoggedIn") === "true";
+}
+
+function goToProfile() {
+  if (isLoggedIn()) {
+    window.location.href = "{% url 'profile' %}";
+  } else {
+    window.location.href = "{% url 'login' %}";
+  }
+}
+
+function addToFavorites() {
+  if (!isLoggedIn()) {
+    window.location.href = "{% url 'login' %}";
+    return;
+  }
+
+  const carName = "KIA Sorento";
+  const notification = document.getElementById("favoriteNotification");
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  if (!favorites.includes(carName)) {
+    favorites.push(carName);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
+
+  notification.classList.remove("opacity-0");
+  notification.classList.add("opacity-100");
+
+  setTimeout(() => {
+    notification.classList.remove("opacity-100");
+    notification.classList.add("opacity-0");
+  }, 3000);
+}
   </script>
   
   <!-- Share Modal -->
@@ -268,16 +325,16 @@ function copyLink() {
   <p id="copyStatus" class="mt-2 text-xs text-black">Copy Link</p>
 </div>
 
-      <!-- Add to Favorite -->
-      <div class="flex flex-col items-center">
-        <div class="bg-gray-300 p-4 rounded-full">
-          <svg class="h-6 w-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 0 1 6.364 0L12 7.636l1.318-1.318a4.5 4.5 0 1 1 6.364 6.364L12 21.364l-7.682-7.682a4.5 4.5 0 0 1 0-6.364z" />
-          </svg>
-        </div>
-        <p class="mt-2 text-xs text-black">Add to favorite</p>
-      </div>
-    </div>
+  <!-- Add to Favorite -->
+<div onclick="addToFavorites()" class="flex flex-col items-center cursor-pointer">
+  <div class="bg-gray-300 p-4 rounded-full">
+    <svg class="h-6 w-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 0 1 6.364 0L12 7.636l1.318-1.318a4.5 4.5 0 1 1 6.364 6.364L12 21.364l-7.682-7.682a4.5 4.5 0 0 1 0-6.364z" />
+    </svg>
+  </div>
+  <p class="mt-2 text-xs text-black">Add to favorite</p>
+</div>
+
 
     <!-- Close Button -->
     <button onclick="toggleShare()" class="absolute top-3 right-4">
@@ -288,8 +345,15 @@ function copyLink() {
   </div>
 </div>
 
+<!-- Notification -->
+<div id="favoriteNotification" class="notification fixed bottom-36 left-1/2 transform -translate-x-1/2 bg-white text-gray-700 px-6 py-3 rounded-lg shadow-lg flex items-center gap-3 opacity-0 transition-opacity duration-500 z-50">
+  <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+  </svg>
+  <span class="text-sm font-semibold">Added to Favorites</span>
+</div>
 
-  
+
 
 </body>
 </html>
