@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPORT - AutoHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      max-width: 430px;
+      margin: 0 auto;
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-gray-800 flex flex-col">
+
+<!-- Header -->
+<div class="flex justify-between items-center px-4 py-4">
+  <button id="sidebarToggle" aria-label="Menu">
+    <i class="fas fa-bars text-xl"></i>
+  </button>
+  <div class="flex gap-4">
+    <i class="fas fa-user-circle text-xl"></i>
+    <i class="fas fa-search text-xl"></i>
+  </div>
+</div>
+
+<!-- SPORT Title with Arrows -->
+<div class="flex items-center justify-center mt-4 mb-4 space-x-4">
+  <h1 class="text-2xl font-semibold text-gray-700 tracking-wide">SPORT</h1>
+</div>
+
+<!-- SPORT Cards -->
+<main class="space-y-6 px-4">
+  <!-- Porsche 718 Boxster -->
+  <div class="bg-gray-200 rounded-xl shadow-md p-3 border border-black">
+    <img src="https://i.ibb.co/d40tHmSV/image.png" class="h-36 object-contain mx-auto rounded-md mb-2" />
+    <h2 class="text-center font-bold text-base">Porsche 718 Boxster</h2>
+    <div class="text-right">
+      <a href="#" class="text-blue-500 text-sm font-medium">More Details</a>
+    </div>
+  </div>
+
+  <!-- Toyota GR86  -->
+  <div class="bg-gray-200 rounded-xl shadow-md p-3 border border-black">
+    <img src="https://i.ibb.co/3mkHj1Fh/Rectangle-36.png" class="h-41 object-contain mx-auto rounded-md mb-2" />
+    <h2 class="text-center font-bold text-base">Toyota GR86 </h2>
+    <div class="text-right">
+      <a href="#" class="text-blue-500 text-sm font-medium">More Details</a>
+    </div>
+  </div>
+
+  <!-- Mazda MX-5 -->
+  <div class="bg-gray-200 rounded-xl shadow-md p-3 border border-black">
+    <img src="https://i.ibb.co/pvh7vwZN/Mazda-MX-5-Miata-Transparent-Background-1-1.png" class="h-36   object-contain mx-auto rounded-md mb-2" />
+    <h2 class="text-center font-bold text-base">Mazda MX-5</h2>
+    <div class="text-right">
+      <a href="#" class="text-blue-500 text-sm font-medium">More Details</a>
+    </div>
+  </div>
+
+  <!-- Empty Box -->
+  <div class="bg-gray-200 rounded-xl shadow-md p-3 border border-black h-[210px] flex flex-col justify-end">
+    <h2 class="text-center font-bold text-base"></h2>
+    <div class="text-right">
+      <a href="#" class="text-blue-500 text-sm font-medium">More Details</a>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="mt-auto py-6 text-center text-sm text-white bg-[#343434]">
+</footer>
+
+<!-- Sidebar -->
+<div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm z-40 hidden"></div>
+<div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-[#343434] text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 p-6">
+  <button id="closeSidebar" class="text-white mb-4">
+    <i class="fas fa-arrow-left"></i>
+  </button>
+  <h1 class="text-2xl font-bold mb-6">AutoHub</h1>
+  <nav class="space-y-4">
+    <a href="home.html" class="block">HOME</a>
+    <a href="suv.html" class="block">SUV</a>
+    <a href="mpv.html" class="block">MPV</a>
+    <a href="hatchback.html" class="block">HATCHBACK</a>
+    <a href="sedan.html" class="block">SEDAN</a>
+    <a href="coupe.html" class="block">COUPE</a>
+    <a href="luxury.html" class="block">LUXURY</a>
+    <a href="sport.html" class="block">SPORT</a>
+  </nav>
+</div>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const closeSidebar = document.getElementById('closeSidebar');
+  const overlay = document.getElementById('overlay');
+
+  function openSidebar() {
+    sidebar.classList.remove('-translate-x-full');
+    overlay.classList.remove('hidden');
+  }
+
+  function closeSidebarMenu() {
+    sidebar.classList.add('-translate-x-full');
+    overlay.classList.add('hidden');
+  }
+
+  sidebarToggle.addEventListener('click', openSidebar);
+  closeSidebar.addEventListener('click', closeSidebarMenu);
+  overlay.addEventListener('click', closeSidebarMenu);
+</script>
+
+</body>
+</html>
