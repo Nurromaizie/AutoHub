@@ -6,6 +6,8 @@
   <title>AutoHub</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400&family=Montserrat:wght@300&family=Poppins:wght@700&family=Raleway&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
   <style>
     body {
       max-width: 430px;
@@ -16,17 +18,54 @@
       font-family: 'Exo 2', sans-serif;
       font-size: 24px;
     }
+    .blur-dark {
+      filter: blur(5px) brightness(0.7);
+      transition: all 0.3s ease-in-out;
+    }
   </style>
 </head>
-
 <body class="font-sans">
 
+<!-- Sidebar -->
+<div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-[#343434] text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 p-6">
+  <div class="absolute top-4 left-4">
+    <button id="closeSidebar" aria-label="Close" class="text-gray-400 hover:text-gray-200">
+      <i class="fas fa-arrow-left text-white"></i>
+    </button>
+  </div>
+  <div class="ml-12 mt-12">
+    <h1 class="text-3xl font-bold mb-10">AutoHub</h1>
+    <nav class="space-y-6">
+      <a href="homepage.html" class="block text-white">HOME</a>
+      <a href="SUVpage.html" class="block text-white">SUV</a>
+      <a href="MPV.html" class="block text-white">MPV</a>
+      <a href="Hatchbackpage.html" class="block text-white">HATCHBACK</a>
+      <a href="sedan.html" class="block text-white">SEDAN</a>
+      <a href="Coupe (Category).html" class="block text-white">COUPE</a>
+      <a href="Luxury (Category).html" class="block text-white">LUXURY</a>
+      <a href="Sportpage.html" class="block text-white">SPORT</a>
+    </nav>
+    <div class="space-y-4 mt-10">
+      <a href="AboutPage.html" class="flex items-center space-x-2">
+        <i class="fas fa-info-circle"></i><span>About</span>
+      </a>
+      <a href="login.html" class="flex items-center space-x-2">
+        <i class="fas fa-sign-out-alt"></i><span>Log out</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Content Wrapper -->
+<div id="contentWrapper">
   <!-- Header Section -->
   <div class="relative">
-    <div class="absolute top-2 left-2">
-      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
+    <div class="absolute top-2 left-2 z-10">
+      <button id="sidebarToggle">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
     </div>
     <div class="absolute top-10 left-3 flex items-center space-x-1">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Brunei.svg" alt="Brunei Flag" class="w-4 h-3">
@@ -40,6 +79,7 @@
       Find your next car.
     </p>
   </div>
+
 
   <!-- Filter + Search -->
   <div class="px-4 pt-4">
@@ -143,6 +183,24 @@
       </div>
     </div>
   </div>
+
+<!-- Sidebar Script -->
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const mainContent = document.getElementById('contentWrapper');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const closeSidebar = document.getElementById('closeSidebar');
+
+  sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('-translate-x-full');
+    mainContent.classList.add('blur-dark');
+  });
+
+  closeSidebar.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');
+    mainContent.classList.remove('blur-dark');
+  });
+</script>
 
   <script>
     const carousel = document.getElementById('carousel');
