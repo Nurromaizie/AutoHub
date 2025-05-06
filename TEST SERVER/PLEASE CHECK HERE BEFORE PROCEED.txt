@@ -1,0 +1,21 @@
+*IMPORTANT* - Better sorang saja run server so yg lain dapat through ip address yang be set sudah.
+
+1. Run Local Server personally :-
+	a. Open PowerShell.
+	b. Open to "Beta" folder directory.
+	c. Then enter the virtual by typing "env\Scripts\activate" (If ada error ertinya alum create kali Virtual Environment)
+	d. Then run command "python manage.py tailwind start" if dah masuk "(venv)".
+	e. Pastu, buka terminal lagi satu and follow steps a-c then type command "python manage.py runserver"
+	f. Kan tutup server, takan "Ctrl+C"
+
+
+2. Wakil Run Local Server others connect thru IP saja arah Browser (SANGAT RECOMMEND UNTUK AVOID MASALAH TEKNIKAL) :-
+	a. Open PowerShell.
+	b. Open to "Beta" folder directory.
+	c. Then enter the virtual by typing "env\Scripts\activate" (If ada error ertinya alum create kali Virtual Environment)
+	d. Then run command "python manage.py tailwind start" if dah masuk "(venv)".
+	e. Pastu, buka terminal lagi satu and follow steps a-c then type command "python manage.py runserver 0.0.0.0:8000"
+	f. Then others boleh masuk and cek tarus website on the current server by simply masukkan IP for instance "192.168.100.106:8000" either phone or laptop without requiring sorang2 setup as mentioned on Option 1.
+	f. Kan tutup server, takan "Ctrl+C"
+
+ 
