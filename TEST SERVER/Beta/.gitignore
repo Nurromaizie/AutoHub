@@ -1,0 +1,71 @@
+﻿# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+*.env
+*.venv
+
+# Django stuff:
+*.log
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static/
+
+# Local settings
+local_settings.py
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Pycharm
+.idea/
+*.iml
+
+# Migrations (optional, if you want to track them remove this)
+**/migrations/**
+
+# Node modules (if using npm/yarn for frontend)
+node_modules/
+
+# Compiled C extensions
+*.so
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Pipenv
+Pipfile.lock
+
+# Coverage reports
+htmlcov/
+.coverage
+*.cover
+.hypothesis/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# Celery
+celerybeat-schedule
+
+# Gunicorn
+gunicorn.pid
+
+# Heroku
+*.procfile
+
+# Tailwind build and source files (django-tailwind)
+theme/static_src/
+theme/static/css/
