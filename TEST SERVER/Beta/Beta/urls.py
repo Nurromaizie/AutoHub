@@ -20,6 +20,10 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('recovery/', views.Recovery, name='ewcoveryPW'),
     path('Create/', views.NewAcc, name='newAcc'),
+    path('browse/brand/', views.browse_by_brand, name='browse_by_brand'),
+    path('browse/price/', views.browse_by_price, name='browse_by_price'),
+    path('browse/model/', views.browse_by_model, name='browse_by_model'),
+    path('browse/seater/', views.browse_by_seat, name='browse_by_seat'),
     
 
 ]

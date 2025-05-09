@@ -342,18 +342,34 @@ const sortTrigger = document.querySelectorAll('.browse-button'); // Get all brow
     // Set popup title based on filter type
     if (filterType === 'brand') {
       popupTitle.textContent = 'BRAND';
-      popupOptions.innerHTML = '<li class="cursor-pointer hover:text-blue-600 list-disc">Toyota</li><li class="cursor-pointer hover:text-blue-600 list-disc">Hyundai</li><li class="cursor-pointer hover:text-blue-600 list-disc">Kia</li>';
+      popupOptions.innerHTML = `
+        <li onclick="browseByBrand('Toyota')" class="cursor-pointer hover:text-blue-600 list-disc">Toyota</li>
+        <li onclick="browseByBrand('Hyundai')" class="cursor-pointer hover:text-blue-600 list-disc">Hyundai</li>
+        <li onclick="browseByBrand('Kia')" class="cursor-pointer hover:text-blue-600 list-disc">Kia</li>
+      `;
     } else if (filterType === 'price') {
       popupTitle.textContent = 'PRICE';
-      popupOptions.innerHTML = '<li class="cursor-pointer hover:text-blue-600 list-disc">High to Low</li><li class="cursor-pointer hover:text-blue-600 list-disc">Low to High</li>';
+      popupOptions.innerHTML = `
+        <li onclick="browseByPrice('high')" class="cursor-pointer hover:text-blue-600 list-disc">High to Low</li>
+        <li onclick="browseByPrice('low')" class="cursor-pointer hover:text-blue-600 list-disc">Low to High</li>
+      `;
     } else if (filterType === 'model') {
       popupTitle.textContent = 'MODEL';
-      popupOptions.innerHTML = '<li class="cursor-pointer hover:text-blue-600 list-disc">SUV</li><li class="cursor-pointer hover:text-blue-600 list-disc">MPV</li><li class="cursor-pointer hover:text-blue-600 list-disc">SEDAN</li>';
+      popupOptions.innerHTML = `
+        <li onclick="browseByModel('SUV')" class="cursor-pointer hover:text-blue-600 list-disc">SUV</li>
+        <li onclick="browseByModel('MPV')" class="cursor-pointer hover:text-blue-600 list-disc">MPV</li>
+        <li onclick="browseByModel('SEDAN')" class="cursor-pointer hover:text-blue-600 list-disc">SEDAN</li>
+      `;
     } else if (filterType === 'seat') {
       popupTitle.textContent = 'SEATER';
-      popupOptions.innerHTML = '<li class="cursor-pointer hover:text-blue-600 list-disc">2 Seater</li><li class="cursor-pointer hover:text-blue-600 list-disc">4 Seater</li><li class="cursor-pointer hover:text-blue-600 list-disc">5 Seater</li>';
+      popupOptions.innerHTML = `
+        <li onclick="browseBySeat(2)" class="cursor-pointer hover:text-blue-600 list-disc">2 Seater</li>
+        <li onclick="browseBySeat(4)" class="cursor-pointer hover:text-blue-600 list-disc">4 Seater</li>
+        <li onclick="browseBySeat(5)" class="cursor-pointer hover:text-blue-600 list-disc">5 Seater</li>
+      `;
     }
 
+    
     // Show popup and overlay
     popup.classList.remove('hidden');
     setTimeout(() => {
@@ -391,24 +407,6 @@ const sortTrigger = document.querySelectorAll('.browse-button'); // Get all brow
   const closeSearch = document.getElementById("closeSearch");
   const searchInput = document.getElementById("searchInput");
   const searchResults = document.getElementById("searchResults");
-
-  const cars = [
-    "Hyundai H1",
-    "Hyundai Elantra",
-    "Hyundai i30 N",
-    "Hyundai Kona",
-    "Hyundai Stargazer",
-    "Kia K5",
-    "Kia Cerato",
-    "Kia Sportage",
-    "Kia Carnival",
-    "Kia Seltos",
-    "Toyota Raize",
-    "Toyota Fortuner",
-    "Toyota GR86",
-    "Toyota Vios",
-    "Toyota Yaris"
-  ];
 
   openSearch.addEventListener("click", () => {
     searchModal.classList.remove("hidden");
@@ -478,39 +476,6 @@ searchInput.addEventListener("input", (e) => {
    });
 });
 
-// Function to open the popup and apply the blur effect
-function openSortPopup(filterType) {
-  const popupTitle = document.getElementById('popupTitle');
-  const popupOptions = document.getElementById('popupOptions');
-  popupOptions.innerHTML = ''; // Clear previous options
-
-  // Set popup title based on filter type
-  if (filterType === 'brand') {
-    popupTitle.textContent = 'BRAND';
-    popupOptions.innerHTML = '<li class="cursor-pointer hover:text-blue-600 list-disc">Toyota</li><li class="cursor-pointer hover:text-blue-600 list-disc">Hyundai</li><li class="cursor-pointer hover:text-blue-600 list-disc">Kia</li>';
-  } else if (filterType === 'price') {
-    popupTitle.textContent = 'PRICE';
-    popupOptions.innerHTML = '<li class="cursor-pointer hover:text-blue-600 list-disc">High to Low</li><li class="cursor-pointer hover:text-blue-600 list-disc">Low to High</li>';
-  } else if (filterType === 'model') {
-    popupTitle.textContent = 'MODEL';
-    popupOptions.innerHTML = '<li class="cursor-pointer hover:text-blue-600 list-disc">SUV</li><li class="cursor-pointer hover:text-blue-600 list-disc">MPV</li><li class="cursor-pointer hover:text-blue-600 list-disc">SEDAN</li>';
-  } else if (filterType === 'seat') {
-    popupTitle.textContent = 'SEATER';
-    popupOptions.innerHTML = '<li class="cursor-pointer hover:text-blue-600 list-disc">2 Seater</li><li class="cursor-pointer hover:text-blue-600 list-disc">4 Seater</li><li class="cursor-pointer hover:text-blue-600 list-disc">5 Seater</li>';
-  }
-
-  // Show popup and overlay
-  popup.classList.remove('hidden');
-  setTimeout(() => {
-    popup.classList.add('show');
-  }, 10); // Small delay to trigger fade-in
-
-  popupContent.classList.add('show'); // Popup smooth transition
-  mainContent.classList.add('blur-background'); // Apply background blur
-  overlay.classList.remove('hidden');          // Show overlay
-  overlay.classList.add('show');               // Apply overlay opacity
-}
-
 function handleSearch(event) {
   event.preventDefault(); // Prevent default form submit
   const query = searchInput.value.trim();
@@ -526,6 +491,22 @@ searchForm.addEventListener('submit', handleSearch);
 div.addEventListener('click', () => {
   window.location.href = `/result/?query=${encodeURIComponent(car)}`;
 });
+
+function browseByBrand(brand) {
+  window.location.href = `/browse/brand/?name=${encodeURIComponent(brand)}`;
+}
+
+function browseByPrice(order) {
+  window.location.href = `/browse/price/?order=${order}`;
+}
+
+function browseByModel(model) {
+  window.location.href = `/browse/model/?type=${encodeURIComponent(model)}`;
+}
+
+function browseBySeat(seat) {
+  window.location.href = `/browse/seater/?count=${seat}`;
+}
   
   </script>
   
