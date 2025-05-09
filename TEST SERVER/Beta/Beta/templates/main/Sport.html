@@ -57,15 +57,14 @@
 
     <!-- Profile and Search -->
     <div class="flex space-x-4">
-      <button>
+      <a href="{% url 'profile' %}" aria-label="Profile" class="hover:text-gray-200">
         <img src="https://i.ibb.co/d489N1xY/image-27.png" alt="Profile" class="w-6 h-6">
-      </button>
-      <button>
+      </a>
+      <a href="{% url 'search' %}" aria-label="Search" class="hover:text-gray-200">
         <img src="https://i.ibb.co/N2X0BD7S/search.png" alt="Search" class="w-6 h-6">
-      </button>
+      </a>
     </div>
-  </div>
-
+  </div>    
   <!-- Category Header with Arrows -->
   <div class="flex justify-center items-center space-x-4 mt-2">
     <button>
@@ -79,45 +78,20 @@
 
   <!-- Car Listings -->
   <div class="px-4 mt-6 space-y-6">
+    {% for car in cars %}
+      <div class="bg-white rounded-xl shadow-md p-4 border-2 border-black">
+        <img src="{{ car.image_url }}" alt="{{ car.name }}" class="mx-auto mb-4 h-40 w-full object-contain">
 
-    <!-- Car Card 1 -->
-    <div class="bg-white rounded-xl shadow-md p-4 border-2 border-black">
-      <img src="https://i.ibb.co/PsWys6sr/image.png" alt="Hyundai Kona N Line" class="mx-auto mb-4">
-      <div class="text-center">
-        <h2 class="font-semibold">Porsche 718 Boxster</h2>
-        <a href="#" class="text-blue-600 text-sm hover:underline">More Details</a>
+        <div class="text-center">
+          <h2 class="font-semibold">{{ car.name }}</h2>
+          <a href="{% url 'car_detail' car.id %}" class="text-blue-600 text-sm hover:underline">More Details</a>
+        </div>
       </div>
-    </div>
-
-    <!-- Car Card 2 -->
-    <div class="bg-white rounded-xl shadow-md p-4 border-2 border-black">
-      <img src="https://i.ibb.co/qMRGWpfb/Rectangle-36-1.png" alt="Honda HR-V" class="mx-auto mb-4">
-      <div class="text-center">
-        <h2 class="font-semibold">Toyota GR86</h2>
-        <a href="#" class="text-blue-600 text-sm hover:underline">More Details</a>
-      </div>
-    </div>
-
-    <!-- Car Card 3 -->
-    <div class="bg-white rounded-xl shadow-md p-4 border-2 border-black">
-      <img src="https://i.ibb.co/gZzrCBc3/Mazda-MX-5-Miata-Transparent-Background-2.png" alt="Land Rover Defender 90" class="mx-auto mb-4">
-      <div class="text-center">
-        <h2 class="font-semibold">Mazda MX-5</h2>
-        <a href="#" class="text-blue-600 text-sm hover:underline">More Details</a>
-      </div>
-    </div>
-
-    <!-- Car Card 4 -->
-    <div class="bg-white rounded-xl shadow-md p-4 border-2 border-black">
-      <img src="https://i.ibb.co/gZzrCBc3/Mazda-MX-5-Miata-Transparent-Background-2.png" alt="Mazda MX-5" class="mx-auto mb-4">
-      <div class="text-center">
-        <h2 class="font-semibold">Mazda MX-5</h2>
-        <a href="#" class="text-blue-600 text-sm hover:underline">More Details</a>
-      </div>
-    </div>
-
+    {% empty %}
+      <p class="text-center text-gray-600">No SUV cars found.</p>
+    {% endfor %}
   </div>
-</div>
+  
 
 <!-- Sidebar Script -->
 <script>

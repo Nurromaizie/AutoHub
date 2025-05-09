@@ -158,7 +158,7 @@
           <span>About</span>
       </a>
     </div>
-      <a href="login.html" class="flex items-center space-x-2">
+      <a href="{% url 'login' %}" class="flex items-center space-x-2">
         <i class="fas fa-sign-out-alt"></i><span>Log out</span>
       </a>
     </div>
@@ -218,7 +218,6 @@
     </div>
 
   <!-- Scrollable Car Cards in 5x2 Style -->
-  <p class="text-red-500 text-sm">Loaded {{ cars|length }} cars</p>
   <div class="overflow-x-auto overflow-y-hidden pb-4">
     <div class="grid grid-rows-2 grid-flow-col auto-cols-max gap-3 w-max">
       {% for car in cars %}
@@ -492,20 +491,26 @@ div.addEventListener('click', () => {
   window.location.href = `/result/?query=${encodeURIComponent(car)}`;
 });
 
+function getBaseQuery() {
+  return 'all';
+}
+
 function browseByBrand(brand) {
   window.location.href = `/browse/brand/?name=${encodeURIComponent(brand)}`;
 }
 
+
 function browseByPrice(order) {
-  window.location.href = `/browse/price/?order=${order}`;
+  window.location.href = `/browse/price/?order=${encodeURIComponent(order)}`;
 }
 
 function browseByModel(model) {
-  window.location.href = `/browse/model/?type=${encodeURIComponent(model)}`;
+  window.location.href = `/browse/model/?name=${encodeURIComponent(model)}`;
 }
 
 function browseBySeat(seat) {
   window.location.href = `/browse/seater/?count=${seat}`;
+
 }
   
   </script>

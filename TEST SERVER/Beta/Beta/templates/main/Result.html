@@ -74,21 +74,21 @@
   <div class="ml-12 mt-12">
       <h1 class="text-3xl font-bold mb-10">AutoHub</h1>
       <nav class="space-y-6">
-          <a href="#" class="block text-white">HOME</a>
-          <a href="#" class="block text-white">SUV</a>
-          <a href="#" class="block text-white">MPV</a>
-          <a href="#" class="block text-white">HATCHBACK</a>
-          <a href="#" class="block text-white">SEDAN</a>
-          <a href="#" class="block text-white">COUPE</a>
-          <a href="#" class="block text-white">LUXURY</a>
-          <a href="#" class="block text-white">SPORT</a>
+        <a href="{% url 'homepage' %}" class="block text-white">HOME</a>
+        <a href="{% url 'SUV_category' %}" class="block text-white">SUV</a>
+        <a href="{% url 'MPV_category' %}" class="block text-white">MPV</a>
+        <a href="{% url 'hatchback_category' %}" class="block text-white">HATCHBACK</a>
+        <a href="{% url 'sedan_category' %}" class="block text-white">SEDAN</a>
+        <a href="{% url 'coupe_category' %}" class="block text-white">COUPE</a>
+        <a href="{% url 'luxury_category' %}" class="block text-white">LUXURY</a>
+        <a href="{% url 'sport_category' %}" class="block text-white">SPORT</a>
       </nav>
       <div class="space-y-4 mt-10">
           <a href="{% url 'about' %}" class="flex items-center space-x-2">
               <i class="fas fa-info-circle"></i>
               <span>About</span>
           </a>
-          <a href="#" class="flex items-center space-x-2">
+          <a href="{% url 'login' %}" class="flex items-center space-x-2">
               <i class="fas fa-sign-out-alt"></i>
               <span>Log out</span>
           </a>
@@ -102,9 +102,17 @@
       <button id="sidebarToggle" aria-label="Menu" class="text-black text-2xl">
         <i class="fas fa-bars"></i>
       </button>
-      <button aria-label="User Account" class="text-black text-2xl">
-        <i class="fas fa-user"></i>
-      </button>
+        <div class="flex space-x-4">
+      <a href="{% url 'profile' %}" aria-label="Profile" class="hover:text-gray-200">
+        <img src="https://i.ibb.co/d489N1xY/image-27.png" alt="Profile" class="w-6 h-6">
+      </a>
+      <a href="{% url 'search' %}" aria-label="Search" class="hover:text-gray-200">
+        <img src="https://i.ibb.co/N2X0BD7S/search.png" alt="Search" class="w-6 h-6">
+      </a>
+    </div>
+  </div>  
+      </header>
+      
     </header>
     <main>
       <h1 class="text-gray-600 text-2xl mb-3 font-normal text-center">
@@ -147,7 +155,7 @@
                   </div>
                 </div>
               </div>
-              <a class="text-xs text-blue-600 mt-3 sm:mt-0 ml-auto" href="#">More Details</a>
+              <a class="text-xs text-blue-600 mt-3 sm:mt-0 ml-auto" href="{% url 'car_detail' car.id %}">More Details</a>
             </article>
           {% endfor %}
         {% else %}
@@ -171,8 +179,9 @@
     <span id="arrowPrice">▼</span>
   </h2>
   <ul id="priceOptions" class="ml-6 mt-2 space-y-1 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
-    <li class="cursor-pointer hover:text-blue-600 list-disc">HIGHER TO LOW</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">LOW TO HIGHER</li>
+    <li onclick="applySort('high')" class="cursor-pointer hover:text-blue-600 list-disc">HIGHER TO LOW</li>
+    <li onclick="applySort('low')" class="cursor-pointer hover:text-blue-600 list-disc">LOW TO HIGHER</li>
+
   </ul>
 </div>
 
@@ -183,11 +192,11 @@
     <span id="arrowSeat">▼</span>
   </h2>
   <ul id="seatOptions" class="ml-6 mt-2 space-y-1 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
-    <li class="cursor-pointer hover:text-blue-600 list-disc">2 SEATER</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">3 SEATER</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">5 SEATER</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">7 SEATER</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">9 SEATER</li>
+    <li onclick="applySeat(2)" class="cursor-pointer hover:text-blue-600 list-disc">2 SEATER</li>
+    <li onclick="applySeat(3)" class="cursor-pointer hover:text-blue-600 list-disc">3 SEATER</li>
+    <li onclick="applySeat(5)" class="cursor-pointer hover:text-blue-600 list-disc">5 SEATER</li>
+    <li onclick="applySeat(7)" class="cursor-pointer hover:text-blue-600 list-disc">7 SEATER</li>
+    <li onclick="applySeat(9)" class="cursor-pointer hover:text-blue-600 list-disc">9 SEATER</li>
   </ul>
 </div>
 
@@ -198,8 +207,8 @@
     <span id="arrowPerformance">▼</span>
   </h2>
   <ul id="performanceOptions" class="ml-6 mt-2 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
-    <li class="cursor-pointer hover:text-blue-600 list-disc">AUTOMATIC</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">MANUAL</li>
+    <li onclick="applyTransmission('automatic')" class="cursor-pointer hover:text-blue-600 list-disc">AUTOMATIC</li>
+    <li onclick="applyTransmission('manual')" class="cursor-pointer hover:text-blue-600 list-disc">MANUAL</li>
   </ul>
 </div>
 
@@ -210,13 +219,13 @@
     <span id="arrowModel">▼</span>
   </h2>
   <ul id="modelOptions" class="ml-6 mt-2 space-y-1 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
-    <li class="cursor-pointer hover:text-blue-600 list-disc">SUV</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">MPV</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">HATCHBACK</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">SEDAN</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">COUPE</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">LUXURY</li>
-    <li class="cursor-pointer hover:text-blue-600 list-disc">SPORT</li>
+    <li onclick="applyModel('SUV')" class="cursor-pointer hover:text-blue-600 list-disc">SUV</li>
+    <li onclick="applyModel('MPV')" class="cursor-pointer hover:text-blue-600 list-disc">MPV</li>
+    <li onclick="applyModel('HATCHBACK')" class="cursor-pointer hover:text-blue-600 list-disc">HATCHBACK</li>
+    <li onclick="applyModel('SEDAN')" class="cursor-pointer hover:text-blue-600 list-disc">SEDAN</li>
+    <li onclick="applyModel('COUPE')" class="cursor-pointer hover:text-blue-600 list-disc">COUPE</li>
+    <li onclick="applyModel('LUXURY')" class="cursor-pointer hover:text-blue-600 list-disc">LUXURY</li>
+    <li onclick="applyModel('SPORT')" class="cursor-pointer hover:text-blue-600 list-disc">SPORT</li>
   </ul>
 </div>
 
@@ -225,110 +234,126 @@
 
 
   <script>
-   document.addEventListener('DOMContentLoaded', function () {
-  const sortTrigger = document.getElementById('sortTrigger');
-  const popup = document.getElementById('sortPopup');
-  const popupContent = document.querySelector('.popup-content');
-  const mainContent = document.getElementById('mainContent');
-  const closeBtn = document.getElementById('closeSortPopup');
-  const searchInput = document.querySelector('input[type="text"]');
-  const searchButton = document.querySelector('button[type="submit"]');
-
-
- // Sort filter expand/collapse with arrow
-const toggleSections = [
-  { headerId: 'togglePrice', contentId: 'priceOptions', arrowId: 'arrowPrice' },
-  { headerId: 'toggleSeat', contentId: 'seatOptions', arrowId: 'arrowSeat' },
-  { headerId: 'togglePerformance', contentId: 'performanceOptions', arrowId: 'arrowPerformance' },
-  { headerId: 'toggleModel', contentId: 'modelOptions', arrowId: 'arrowModel' }
-];
-
-toggleSections.forEach(section => {
-  const header = document.getElementById(section.headerId);
-  const content = document.getElementById(section.contentId);
-  const arrow = document.getElementById(section.arrowId);
-
-  header.addEventListener('click', () => {
-    if (content.style.maxHeight && content.style.maxHeight !== "0px") {
-      content.style.maxHeight = "0px";
-      arrow.textContent = "▼"; // collapsed
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-      arrow.textContent = "▲"; // expanded
-    }
-  });
-});
-
-
-
-  // Sidebar toggling
-const sidebar = document.getElementById('sidebar');
-const toggleButton = document.getElementById('sidebarToggle');
-const closeButton = document.getElementById('closeSidebar');
-
-toggleButton.addEventListener('click', () => {
-    sidebar.classList.toggle('-translate-x-full');
-    mainContent.classList.add('blur-dark'); // Blur and darken the main content
-});
-
-closeButton.addEventListener('click', () => {
-    sidebar.classList.add('-translate-x-full');
-    mainContent.classList.remove('blur-dark'); // Remove blur-dark when closing
-});
-
-
-
-  // Set the search term from URL
-  const params = new URLSearchParams(window.location.search);
-  const query = params.get('query') || "Toyota"; // default if empty
-
-  document.getElementById('searchTerm').textContent = `“${query}”`;
-  if (searchInput) {
-    searchInput.value = query;
-  }
-
-  // Search button behavior
-  function handleSearch(event) {
-    event.preventDefault(); // stop form submit
-    const newQuery = searchInput.value.trim();
-    if (newQuery.length > 0) {
-      window.location.href = `/result/?query=${encodeURIComponent(newQuery)}`;
-    } else {
-      alert("Please enter something to search.");
-    }
-  }
-
-  searchButton.addEventListener('click', handleSearch);
-
-  searchInput.addEventListener('keypress', function (event) {
-    if (event.key === 'Enter') {
-      handleSearch(event);
-    }
-
-  
-
-  });
-
-  // Sort popup behavior
-  sortTrigger.addEventListener('click', () => {
-  popup.classList.remove('hidden');
-  setTimeout(() => {
-    popup.classList.add('show');
-  }, 10); // Small delay to trigger fade-in
-  popupContent.classList.add('show');
-  mainContent.classList.add('blur-background');
-});
-
-  closeBtn.addEventListener('click', () => {
-    popupContent.classList.remove('show');
-    popup.classList.remove('show');
-    setTimeout(() => {
-      popup.classList.add('hidden');
-    }, 300); // Wait for fade-out to finish
-    mainContent.classList.remove('blur-background');
-  });
-
-});
+      // ✅ Define filter functions globally FIRST
+      function getBaseQuery() {
+        const url = new URL(window.location.href);
+        const query = url.searchParams.get('query') || '';
+        return query;
+      }
+      
+      function applySort(order) {
+        const query = getBaseQuery();
+        window.location.href = `/result/?query=${encodeURIComponent(query)}&sort=${order}`;
+      }
+      
+      function applySeat(count) {
+        const query = getBaseQuery();
+        window.location.href = `/result/?query=${encodeURIComponent(query)}&seat=${count}`;
+      }
+      
+      function applyTransmission(type) {
+        const query = getBaseQuery();
+        window.location.href = `/result/?query=${encodeURIComponent(query)}&transmission=${type}`;
+      }
+      
+      function applyModel(model) {
+        const query = getBaseQuery();
+        window.location.href = `/result/?query=${encodeURIComponent(query)}&model=${model}`;
+      }
+      
+      // ✅ Then wrap DOM logic inside DOMContentLoaded
+      document.addEventListener('DOMContentLoaded', function () {
+        const sortTrigger = document.getElementById('sortTrigger');
+        const popup = document.getElementById('sortPopup');
+        const popupContent = document.querySelector('.popup-content');
+        const mainContent = document.getElementById('mainContent');
+        const closeBtn = document.getElementById('closeSortPopup');
+        const searchInput = document.querySelector('input[type="text"]');
+        const searchButton = document.querySelector('button[type="submit"]');
+      
+        // Section toggle logic...
+        const toggleSections = [
+          { headerId: 'togglePrice', contentId: 'priceOptions', arrowId: 'arrowPrice' },
+          { headerId: 'toggleSeat', contentId: 'seatOptions', arrowId: 'arrowSeat' },
+          { headerId: 'togglePerformance', contentId: 'performanceOptions', arrowId: 'arrowPerformance' },
+          { headerId: 'toggleModel', contentId: 'modelOptions', arrowId: 'arrowModel' }
+        ];
+      
+        toggleSections.forEach(section => {
+          const header = document.getElementById(section.headerId);
+          const content = document.getElementById(section.contentId);
+          const arrow = document.getElementById(section.arrowId);
+      
+          header.addEventListener('click', () => {
+            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+              content.style.maxHeight = "0px";
+              arrow.textContent = "▼";
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+              arrow.textContent = "▲";
+            }
+          });
+        });
+      
+        // Sidebar logic
+        const sidebar = document.getElementById('sidebar');
+        const toggleButton = document.getElementById('sidebarToggle');
+        const closeButton = document.getElementById('closeSidebar');
+      
+        toggleButton.addEventListener('click', () => {
+          sidebar.classList.toggle('-translate-x-full');
+          mainContent.classList.add('blur-dark');
+        });
+      
+        closeButton.addEventListener('click', () => {
+          sidebar.classList.add('-translate-x-full');
+          mainContent.classList.remove('blur-dark');
+        });
+      
+        // Set query text
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get('query') || "Toyota";
+        document.getElementById('searchTerm').textContent = `“${query}”`;
+        if (searchInput) searchInput.value = query;
+      
+        // Search submission
+        function handleSearch(event) {
+          event.preventDefault();
+          const newQuery = searchInput.value.trim();
+          if (newQuery.length > 0) {
+            window.location.href = `/result/?query=${encodeURIComponent(newQuery)}`;
+          } else {
+            alert("Please enter something to search.");
+          }
+        }
+      
+        searchButton.addEventListener('click', handleSearch);
+        searchInput.addEventListener('keypress', function (event) {
+          if (event.key === 'Enter') {
+            handleSearch(event);
+          }
+        });
+      
+        // Popup toggle
+        sortTrigger.addEventListener('click', () => {
+          popup.classList.remove('hidden');
+          setTimeout(() => {
+            popup.classList.add('show');
+          }, 10);
+          popupContent.classList.add('show');
+          mainContent.classList.add('blur-background');
+        });
+      
+        closeBtn.addEventListener('click', () => {
+          popupContent.classList.remove('show');
+          popup.classList.remove('show');
+          setTimeout(() => {
+            popup.classList.add('hidden');
+          }, 300);
+          mainContent.classList.remove('blur-background');
+        });
+      });
+      
   </script>
 </body>
 </html>
