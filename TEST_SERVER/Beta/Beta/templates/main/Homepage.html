@@ -1,0 +1,520 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400&family=Montserrat:wght@300&family=Poppins:wght@700&family=Raleway&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
+  <style>
+    body {
+      max-width: 430px;
+      margin: 0 auto;
+      background: linear-gradient(to bottom, #ffffff 50%, #999999 100%);
+    }
+    .autohub-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 24px;
+    }
+    .blur-dark {
+      filter: blur(5px) brightness(0.7);
+      transition: all 0.3s ease-in-out;
+    }
+
+        .popup-content {
+      transform: scale(0.9);
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+    .popup-content.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* Blur effect when popup is open */
+    .blur-background {
+      filter: blur(5px);
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* Fade-in for the overlay and popup */
+    .fade-in {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+    }
+
+    
+   /* Overlay effect */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 40;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#overlay.show {
+  visibility: visible;
+  opacity: 1;
+  z-index: 50;
+}
+
+
+  </style>
+</head>
+
+
+
+<body class="font-sans">
+
+ <!-- Search Modal -->
+<div id="searchModal" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden z-50">
+  <div class="bg-white p-6 rounded-lg w-80 max-w-full shadow-lg relative">
+    
+    <!-- Search Input with Icons -->
+    <div class="relative mb-4">
+      <form id="searchForm" class="relative mb-4">
+  <input 
+    type="text" 
+    id="searchInput" 
+    name="query"
+    placeholder="Search" 
+    class="w-full rounded-full pl-10 pr-10 py-2 ..."
+  />
+  <button 
+    type="submit" 
+    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+  >
+    <svg class="w-5 h-5" ...> <!-- search icon --> </svg>
+  </button>
+</form>
+
+
+      <!-- Search icon on the left -->
+      <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z" />
+        </svg>
+      </div>
+
+      <!-- Clickable Close icon inside input -->
+      <button 
+        id="closeSearch" 
+        type="button"
+        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+        aria-label="Close Search"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Search Results -->
+    <div id="searchResults" class="flex flex-col divide-y divide-gray-300 text-gray-700 text-sm" style="font-family: 'Raleway', sans-serif;">
+      <!-- Dynamic Search Results -->
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<!-- Sidebar -->
+<div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm z-40 hidden"></div>
+<div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-[#343434] text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 p-6">
+  <div class="absolute top-4 left-4">
+    <button id="closeSidebar" aria-label="Close" class="text-gray-400 hover:text-gray-200">
+      <i class="fas fa-arrow-left text-white"></i>
+    </button>
+  </div>
+  <div class="ml-12 mt-12">
+    <h1 class="text-3xl font-bold mb-10">AutoHub</h1>
+    <nav class="space-y-6">
+      <a href="{% url 'homepage' %}" class="block text-white">HOME</a>
+      <a href="{% url 'SUV_category' %}" class="block text-white">SUV</a>
+      <a href="{% url 'MPV_category' %}" class="block text-white">MPV</a>
+      <a href="{% url 'hatchback_category' %}" class="block text-white">HATCHBACK</a>
+      <a href="{% url 'sedan_category' %}" class="block text-white">SEDAN</a>
+      <a href="{% url 'coupe_category' %}" class="block text-white">COUPE</a>
+      <a href="{% url 'luxury_category' %}" class="block text-white">LUXURY</a>
+      <a href="{% url 'sport_category' %}" class="block text-white">SPORT</a>
+    </nav>
+    <div class="space-y-4 mt-10">
+      <a href="{% url 'about' %}" class="flex items-center space-x-2">
+          <i class="fas fa-info-circle"></i>
+          <span>About</span>
+      </a>
+    </div>
+      <a href="{% url 'login' %}" class="flex items-center space-x-2">
+        <i class="fas fa-sign-out-alt"></i><span>Log out</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Header Section -->
+<div id="contentWrapper" class="relative">
+  <div class="absolute top-2 left-2">
+    <button id="sidebarToggle" aria-label="Menu">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+
+    <div class="absolute top-10 left-3 flex items-center space-x-1">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Brunei.svg" alt="Brunei Flag" class="w-4 h-3">
+      <span class="text-white text-sm">BND</span>
+    </div>
+    <img src="https://media.ed.edmunds-media.com/volkswagen/golf-gti/2024/oem/2024_volkswagen_golf-gti_4dr-hatchback_380-autobahn_fq_oem_1_1600.jpg" 
+         alt="Volkswagen Golf GTI" 
+         class="w-full h-[230px] object-cover">
+    <h1 class="absolute top-9 w-full text-center text-white autohub-title">AutoHub</h1>
+    <p class="absolute top-[188px] left-4 text-white text-[30px]" style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
+      Find your next car.
+    </p>
+  </div>
+
+  <!-- Filter + Search -->
+  <div class="px-4 pt-4">
+    <div class="flex justify-end mb-2">
+      <button id="openSearch" class="flex items-center gap-1 bg-[#d9d9d9] rounded-full px-4 py-1 shadow text-sm font-bold" style="font-family: 'Poppins', sans-serif;">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/012/174/332/small/simple-magnifying-icon-png.png" alt="Search" class="w-4 h-4">
+        SEARCH
+      </button>      
+    </div>
+    <div class="flex flex-wrap justify-center items-center gap-2 text-[11px]" style="font-family: 'Raleway', sans-serif;">
+      <span class="font-semibold">BROWSE:</span>
+      <button class="bg-gray-300 px-3 py-1 rounded shadow browse-button" data-filter-type="brand">BRAND</button>
+      <button class="bg-gray-300 px-3 py-1 rounded shadow browse-button" data-filter-type="price">PRICE</button>
+      <button class="bg-gray-300 px-3 py-1 rounded shadow browse-button" data-filter-type="model">MODEL</button>
+      <button class="bg-gray-300 px-3 py-1 rounded shadow browse-button" data-filter-type="seat">SEATER</button>
+    </div>
+    
+
+    <div id="sortPopup" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-center justify-center z-50 hidden fade-in">
+      <div class="popup-content bg-gray-200 rounded-lg p-6 w-[90%] max-w-sm relative space-y-4">
+        <button id="closeSortPopup" class="absolute top-2 right-2 text-xl text-gray-800 font-bold">&times;</button>
+        <h2 id="popupTitle" class="text-black font-semibold mb-2">Filter</h2>
+        <ul id="popupOptions" class="ml-2 mt-2 space-y-2">
+          <!-- JS will inject options here -->
+        </ul>
+      </div>
+    </div>
+
+  <!-- Scrollable Car Cards in 5x2 Style -->
+  <div class="overflow-x-auto overflow-y-hidden pb-4">
+    <div class="grid grid-rows-2 grid-flow-col auto-cols-max gap-3 w-max">
+      {% for car in cars %}
+        <a href="{% url 'car_detail' car.id %}">
+          <div class="bg-[#d9d9d9] rounded shadow w-32 h-32 p-2 flex flex-col items-center justify-between text-center hover:shadow-lg transition">
+            <div class="h-20 flex items-center justify-center">
+              <img src="{{ car.image_url }}" class="max-h-full object-contain" />
+            </div>
+            <p class="text-xs leading-tight" style="font-family: 'Raleway', sans-serif;">{{ car.name }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+      <div class="text-right mt-4">
+        <a href="{% url 'ViewAllCar' %}" class="text-xs text-blue-600 font-semibold whitespace-nowrap">View all cars</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top 3 Latest Favorite Cars -->
+  <div class="px-4 py-6">
+    <h2 class="text-center text-sm font-bold mb-4" style="font-family: 'Poppins', sans-serif; font-weight: 700;">Top 3 Latest Favorite Cars</h2>
+    <div class="relative">
+      <div id="carousel" class="snap-x snap-mandatory overflow-x-auto flex space-x-4 pb-2 scroll-smooth">
+        <div class="flex-shrink-0 snap-center w-full text-center">
+          <img src="https://purepng.com/public/uploads/large/purepng.com-red-porsche-911-gt3-rs-4-carcarvehicletransportporsche-961524661235vbivb.png" class="h-36 mx-auto object-contain" />
+        </div>
+        <div class="flex-shrink-0 snap-center w-full text-center">
+          <img src="https://www.pngplay.com/wp-content/uploads/13/Land-Rover-Defender-PNG-HD-Quality.png" class="h-36 mx-auto object-contain" />
+        </div>
+        <div class="flex-shrink-0 snap-center w-full text-center">
+          <img src="https://inv.assets.sincrod.com/ChromeColorMatch/us/TRANSPARENT_cc_2024BMC890021_01_1280_C31.png" class="h-48 mx-auto object-contain" />
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-3">
+        <div class="flex gap-2">
+          <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+          <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+        </div>
+      </div>
+
+
+      <div class="text-right mt-1 px-4">
+        <a href="{% url 'profile' %}" class="text-xs text-gray-700 font-semibold whitespace-nowrap">View All Favorite</a>
+      </div>
+
+        <!-- Overlay for background blur when popup is open -->
+  <div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm z-40 hidden"></div>
+
+  <!-- Sort Popup Box -->
+  <div id="sortPopup" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-center justify-center z-50 hidden fade-in">
+    <div class="popup-content bg-gray-200 rounded-lg p-6 w-[90%] max-w-sm relative space-y-4">
+      <button id="closeSortPopup" class="absolute top-2 right-2 text-xl text-gray-800 font-bold">&times;</button>
+      <h2 id="popupTitle" class="text-black font-semibold mb-2">Filter</h2>
+      <ul id="popupOptions" class="ml-2 mt-2 space-y-2">
+        <!-- Filter options will be injected here by JS -->
+      </ul>
+    </div>
+  </div>
+
+  
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % 3;
+      carousel.scrollTo({ left: carousel.clientWidth * index, behavior: 'smooth' });
+    }, 3000);
+  
+    document.addEventListener('DOMContentLoaded', function () {
+
+      const sidebarToggle = document.getElementById('sidebarToggle');
+  const closeSidebar = document.getElementById('closeSidebar');
+  const overlay = document.getElementById('overlay');
+  const sidebar = document.getElementById('sidebar');
+
+  sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.remove('-translate-x-full');  // Show sidebar
+    overlay.classList.remove('hidden');            // Show overlay (apply blur effect)
+    overlay.classList.add('show');                 // Ensure overlay is shown
+  });
+
+  closeSidebar.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');   // Hide sidebar
+    overlay.classList.add('hidden');              // Hide overlay (remove blur effect)
+    overlay.classList.remove('show');             // Ensure overlay is hidden
+  });
+
+  overlay.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');   // Hide sidebar
+    overlay.classList.add('hidden');              // Hide overlay (remove blur effect)
+    overlay.classList.remove('show');             // Ensure overlay is hidden
+  });
+});
+      
+const sortTrigger = document.querySelectorAll('.browse-button'); // Get all browse buttons
+  const popup = document.getElementById('sortPopup');
+  const popupContent = document.querySelector('.popup-content');
+  const mainContent = document.getElementById('contentWrapper');
+  const closeBtn = document.getElementById('closeSortPopup');
+  const overlay = document.getElementById('overlay');
+
+  // Trigger popup when "Browse" buttons are clicked
+  sortTrigger.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const filterType = e.target.getAttribute('data-filter-type');
+      openSortPopup(filterType);
+    });
+  });
+
+  // Function to open the popup and apply the blur effect
+  function openSortPopup(filterType) {
+    const popupTitle = document.getElementById('popupTitle');
+    const popupOptions = document.getElementById('popupOptions');
+    popupOptions.innerHTML = ''; // Clear previous options
+
+    // Set popup title based on filter type
+    if (filterType === 'brand') {
+      popupTitle.textContent = 'BRAND';
+      popupOptions.innerHTML = `
+        <li onclick="browseByBrand('Toyota')" class="cursor-pointer hover:text-blue-600 list-disc">Toyota</li>
+        <li onclick="browseByBrand('Hyundai')" class="cursor-pointer hover:text-blue-600 list-disc">Hyundai</li>
+        <li onclick="browseByBrand('Kia')" class="cursor-pointer hover:text-blue-600 list-disc">Kia</li>
+      `;
+    } else if (filterType === 'price') {
+      popupTitle.textContent = 'PRICE';
+      popupOptions.innerHTML = `
+        <li onclick="browseByPrice('high')" class="cursor-pointer hover:text-blue-600 list-disc">High to Low</li>
+        <li onclick="browseByPrice('low')" class="cursor-pointer hover:text-blue-600 list-disc">Low to High</li>
+      `;
+    } else if (filterType === 'model') {
+      popupTitle.textContent = 'MODEL';
+      popupOptions.innerHTML = `
+        <li onclick="browseByModel('SUV')" class="cursor-pointer hover:text-blue-600 list-disc">SUV</li>
+        <li onclick="browseByModel('MPV')" class="cursor-pointer hover:text-blue-600 list-disc">MPV</li>
+        <li onclick="browseByModel('SEDAN')" class="cursor-pointer hover:text-blue-600 list-disc">SEDAN</li>
+      `;
+    } else if (filterType === 'seat') {
+      popupTitle.textContent = 'SEATER';
+      popupOptions.innerHTML = `
+        <li onclick="browseBySeat(2)" class="cursor-pointer hover:text-blue-600 list-disc">2 Seater</li>
+        <li onclick="browseBySeat(4)" class="cursor-pointer hover:text-blue-600 list-disc">4 Seater</li>
+        <li onclick="browseBySeat(5)" class="cursor-pointer hover:text-blue-600 list-disc">5 Seater</li>
+      `;
+    }
+
+    
+    // Show popup and overlay
+    popup.classList.remove('hidden');
+    setTimeout(() => {
+      popup.classList.add('show');
+    }, 10); // Small delay to trigger fade-in
+
+    popupContent.classList.add('show'); // Popup smooth transition
+    mainContent.classList.add('blur-background'); // Apply background blur
+    overlay.classList.remove('hidden');          // Show overlay
+    overlay.classList.add('show');               // Apply overlay opacity
+  }
+
+  // Close the popup
+  closeBtn.addEventListener('click', () => {
+    popupContent.classList.remove('show');
+    popup.classList.remove('show');
+    setTimeout(() => {
+      popup.classList.add('hidden');
+    }, 300); // Wait for fade-out to finish
+
+    mainContent.classList.remove('blur-background'); // Remove background blur
+    overlay.classList.remove('show');               // Hide overlay
+    overlay.classList.add('hidden');                // Hide overlay
+  });
+
+  // Close the popup if the overlay is clicked
+  overlay.addEventListener('click', () => {
+    closeBtn.click(); // Trigger close button click
+  });
+
+
+
+    const searchModal = document.getElementById("searchModal");
+  const openSearch = document.getElementById("openSearch");
+  const closeSearch = document.getElementById("closeSearch");
+  const searchInput = document.getElementById("searchInput");
+  const searchResults = document.getElementById("searchResults");
+
+  openSearch.addEventListener("click", () => {
+    searchModal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    searchInput.focus();
+  });
+
+  closeSearch.addEventListener("click", () => {
+    searchModal.classList.add("hidden");
+    document.body.style.overflow = "";
+  });
+
+  searchModal.addEventListener("click", (e) => {
+    if (e.target === searchModal) {
+      searchModal.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+  });
+
+  searchInput.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase();
+    searchResults.innerHTML = "";
+
+    if (query.trim() === "") return;
+
+    const filtered = cars.filter(car => car.toLowerCase().includes(query));
+
+    filtered.forEach(car => {
+      const div = document.createElement("div");
+      div.textContent = car;
+      div.classList.add("px-2", "py-2", "hover:bg-gray-100", "cursor-pointer");
+      searchResults.appendChild(div);
+    });
+  });
+
+    openSearch.addEventListener("click", () => {
+    searchModal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    searchInput.focus();
+  });
+
+  closeSearch.addEventListener("click", () => {
+    searchModal.classList.add("hidden");
+    document.body.style.overflow = "";
+  });
+
+  searchModal.addEventListener("click", (e) => {
+    if (e.target === searchModal) {
+        searchModal.classList.add("hidden");
+        document.body.style.overflow = "";
+    }
+});
+
+searchInput.addEventListener("input", (e) => {
+   const query = e.target.value.toLowerCase();
+   searchResults.innerHTML = "";
+
+   if (query.trim() === "") return;
+
+   const filtered = cars.filter(car => car.toLowerCase().includes(query));
+
+   filtered.forEach(car => {
+      const div = document.createElement("div");
+      div.textContent = car;
+      div.classList.add("px-2", "py-2", "hover:bg-gray-100", "cursor-pointer");
+      searchResults.appendChild(div);
+   });
+});
+
+function handleSearch(event) {
+  event.preventDefault(); // Prevent default form submit
+  const query = searchInput.value.trim();
+  if (query.length > 0) {
+      window.location.href = `/result/?query=${encodeURIComponent(query)}`;
+  } else {
+      alert("Please enter something to search.");
+  }
+}
+
+searchForm.addEventListener('submit', handleSearch);
+
+div.addEventListener('click', () => {
+  window.location.href = `/result/?query=${encodeURIComponent(car)}`;
+});
+
+function getBaseQuery() {
+  return 'all';
+}
+
+function browseByBrand(brand) {
+  window.location.href = `/browse/brand/?name=${encodeURIComponent(brand)}`;
+}
+
+
+function browseByPrice(order) {
+  window.location.href = `/browse/price/?order=${encodeURIComponent(order)}`;
+}
+
+function browseByModel(model) {
+  window.location.href = `/browse/model/?name=${encodeURIComponent(model)}`;
+}
+
+function browseBySeat(seat) {
+  window.location.href = `/browse/seater/?count=${seat}`;
+
+}
+  
+  </script>
+  
+
+</body>
+</html>

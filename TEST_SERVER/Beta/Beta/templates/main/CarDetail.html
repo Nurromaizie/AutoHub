@@ -1,0 +1,331 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ car.name }} - AutoHub</title>
+  <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      max-width: 430px;
+      margin: 0 auto;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .autohub-title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700; /* Matching the bold font weight from Homepage.html */
+      font-size: 30px;
+      
+    }
+    
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-white to-gray-300 flex flex-col items-center justify-between text-center px-4">
+
+    <!-- Sidebar -->
+ <!-- Overlay -->
+ <div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm z-40 hidden"></div>
+ <!-- SIDEBAR -->
+ <div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm z-40 hidden"></div>
+<div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-[#343434] text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 p-6">
+  <div class="absolute top-4 left-4">
+    <button id="closeSidebar" aria-label="Close" class="text-gray-400 hover:text-gray-200">
+      <i class="fas fa-arrow-left text-white"></i>
+    </button>
+  </div>
+  <div class="ml-12 mt-12">
+    <h1 class="autohub-title mb-10">AutoHub</h1>
+    <nav class="space-y-6 text-left">
+      <a href="{% url 'homepage' %}" class="block text-white">HOME</a>
+      <a href="{% url 'SUV_category' %}" class="block text-white">SUV</a>
+      <a href="{% url 'MPV_category' %}" class="block text-white">MPV</a>
+      <a href="{% url 'hatchback_category' %}" class="block text-white">HATCHBACK</a>
+      <a href="{% url 'sedan_category' %}" class="block text-white">SEDAN</a>
+      <a href="{% url 'coupe_category' %}" class="block text-white">COUPE</a>
+      <a href="{% url 'luxury_category' %}" class="block text-white">LUXURY</a>
+      <a href="{% url 'sport_category' %}" class="block text-white">SPORT</a>
+    </nav>
+    <div class="space-y-4 mt-10">
+      <a href="{% url 'about' %}" class="flex items-center space-x-2">
+          <i class="fas fa-info-circle"></i>
+          <span>About</span>
+      </a>
+    </div>
+      <a href="{% url 'login' %}" class="flex items-center space-x-2">
+        <i class="fas fa-sign-out-alt"></i><span>Log out</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+    <!-- HEADER: absolute top nav icons -->
+    <div class="absolute top-4 left-4">
+      <button id="sidebarToggle" aria-label="Menu">
+        <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>    
+    <div class="absolute top-4 right-4 flex space-x-4 text-gray-600">
+        <!-- Profile Icon -->
+        <a href="{% url 'profile' %}" aria-label="Profile" class="hover:text-gray-200">
+          <img src="https://i.ibb.co/d489N1xY/image-27.png" alt="Profile" class="w-6 h-6">
+        </a>
+
+        <!-- Search Icon -->
+        <a href="{% url 'search' %}" aria-label="Search" class="hover:text-gray-200">
+          <img src="https://i.ibb.co/N2X0BD7S/search.png" alt="Search" class="w-6 h-6">
+        </a>
+        </div>
+  
+    <main class="flex-grow flex flex-col justify-center items-center mt-2">
+
+        <!-- Car Image (slightly higher) -->
+        <img src="{{ car.image_url }}" alt="{{ car.name }}" />
+             <class="h-56 object-contain mb-3" />
+      
+        <!-- Title -->
+        <h1 class="text-2xl text-gray-700 ...">{{ car.name|upper }}</h1>
+      
+        <!-- Car Specs Grid (slightly higher) -->
+      <!-- Car Info Layout: 3–2–2 -->
+      <div class="w-full px-6 mt-4 space-y-5 text-sm text-gray-600">
+        <!-- Row 1: 3 Columns -->
+        <div class="grid grid-cols-3 gap-x-6 text-center">
+          <div>
+            <p class="text-xs">Engine</p>
+            <p>{{ car.engine }}</p>
+          </div>
+          <div>
+            <p class="text-xs">Transmission</p>
+            <p>{{ car.transmission }}</p>
+          </div>
+          <div>
+            <p class="text-xs">Year</p>
+            <p>{{ car.year }}</p>
+          </div>
+        </div>
+    
+        <!-- Row 2: 2 Columns -->
+        <div class="grid grid-cols-2 gap-x-8 text-center">
+          <div>
+            <p class="text-xs">Fuel Type</p>
+            <p>{{ car.fuel_type }}</p>
+          </div>
+          <div>
+            <p class="text-xs">Color</p>
+            <p>{{ car.color }}</p>
+          </div>
+        </div>
+    
+        <!-- Row 3: 2 Columns -->
+        <div class="grid grid-cols-2 gap-x-8 text-center">
+          <div>
+            <p class="text-xs">No. of Seats</p>
+            <p>{{ car.seats }}</p>
+          </div>
+          <div>
+            <p class="text-xs">Body Type</p>
+            <p>{{ car.body_type }}</p>
+          </div>
+        </div>
+      </div>
+    </main>
+      
+  
+<!-- Footer Buttons (Styled & Slightly Higher) -->
+<div class="w-full px-6 mt-12 mb-20 flex justify-between items-center text-sm text-blue-600">
+  <!-- Add Notes -->
+  <button onclick="toggleModal()" class="flex items-center gap-2">
+    <div class="w-5 h-5 flex items-center justify-center border border-blue-600 rounded-full">
+      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+    </div>
+    <a href="/car/{{ car.id }}/Homepage.html">
+        <span id="addNoteText" class="text-sm">Add Notes</span>
+    </a>
+  </button>
+
+  <!-- Share (Updated iOS-style icon) -->
+  <button onclick="toggleShare()" class="flex items-center gap-2">
+    <div class="w-5 h-5 flex items-center justify-center border border-blue-600 rounded">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M16 6l-4-4m0 0L8 6m4-4v12" />
+      </svg>
+    </div>
+    <span class="text-sm">Share</span>
+  </button>
+</div>
+  
+  
+  
+  
+
+  <!-- Notes Modal -->
+  <div id="noteModal" class="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg p-4 w-80">
+      <textarea placeholder="Add a note..." class="w-full h-40 p-2 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"></textarea>
+      <div class="flex justify-end gap-2 mt-2 text-sm">
+        <button onclick="toggleModal()" class="px-3 py-1 rounded hover:underline">Cancel</button>
+        <button id="saveNoteBtn" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Save</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Share Modal -->
+<div id="shareModal" class="fixed inset-0 flex items-end bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden">
+    <div class="w-full bg-white p-6 rounded-t-2xl fade-slide-up relative">
+      <div class="text-center font-semibold text-black mb-4">Send to</div>
+      <div class="flex justify-center gap-10">
+        <!-- Copy Link -->
+        <div onclick="copyLink()" class="flex flex-col items-center cursor-pointer">
+          <div class="bg-gray-300 p-4 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-1.414 1.414a4 4 0 105.656 5.656l1.414-1.414M10.172 13.828a4 4 0 005.656 0l1.414-1.414a4 4 0 00-5.656-5.656l-1.414 1.414" />
+            </svg>
+          </div>
+          <p id="copyStatus" class="mt-2 text-xs text-black">Copy Link</p>
+        </div>
+  
+        <!-- Add to Favorite -->
+        <div onclick="addToFavorites()" class="flex flex-col items-center cursor-pointer">
+          <div class="bg-gray-300 p-4 rounded-full">
+            <svg class="h-6 w-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 0 1 6.364 0L12 7.636l1.318-1.318a4.5 4.5 0 1 1 6.364 6.364L12 21.364l-7.682-7.682a4.5 4.5 0 0 1 0-6.364z" />
+            </svg>
+          </div>
+          <p class="mt-2 text-xs text-black">Add to favorite</p>
+        </div>
+      </div>
+  
+      <!-- Close Button -->
+      <button onclick="toggleShare()" class="absolute top-3 right-4">
+        <svg class="h-5 w-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Notification -->
+  <div id="favoriteNotification" class="notification fixed bottom-36 left-1/2 transform -translate-x-1/2 bg-white text-gray-700 px-6 py-3 rounded-lg shadow-lg flex items-center gap-3 opacity-0 transition-opacity duration-500 z-50">
+    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    <span class="text-sm font-semibold">Added to Favorites</span>
+  </div>
+  
+
+  <script>
+
+    function toggleShare() {
+        const modal = document.getElementById("shareModal");
+        modal.classList.toggle("hidden");
+      }
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+          
+          function copyLink() {
+            const dummyLink = window.location.href;
+            navigator.clipboard.writeText(dummyLink).then(() => {
+              const status = document.getElementById("copyStatus");
+              status.textContent = "Copied!";
+              setTimeout(() => {
+                status.textContent = "Copy Link";
+              }, 2000);
+            });
+          }
+          
+          function addToFavorites() {
+            const carName = "{{ car.name }}";  // Now dynamic
+            const notification = document.getElementById("favoriteNotification");
+          
+            let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+          
+            if (!favorites.includes(carName)) {
+              favorites.push(carName);
+              localStorage.setItem("favorites", JSON.stringify(favorites));
+            }
+          
+            notification.classList.remove("opacity-0");
+            notification.classList.add("opacity-100");
+          
+            setTimeout(() => {
+              notification.classList.remove("opacity-100");
+              notification.classList.add("opacity-0");
+            }, 3000);
+          }
+          
+      const modal = document.getElementById("noteModal");
+      const textarea = modal.querySelector("textarea");
+      const saveBtn = document.getElementById("saveNoteBtn");
+      const addNoteText = document.getElementById("addNoteText");
+  
+      // Load saved note from localStorage if any
+      let savedNote = localStorage.getItem("note") || "";
+      if (savedNote.trim() !== "") {
+        addNoteText.textContent = "Add Notes (1)";
+      }
+  
+      // Toggle modal visibility
+      window.toggleModal = function () {
+        if (!modal.classList.contains("hidden")) {
+          modal.classList.add("hidden");
+        } else {
+          textarea.value = savedNote;
+          modal.classList.remove("hidden");
+        }
+      };
+  
+      // Save note logic
+      saveBtn.addEventListener("click", function () {
+        savedNote = textarea.value.trim();
+        localStorage.setItem("note", savedNote);
+  
+        if (savedNote !== "") {
+          addNoteText.textContent = "Add Notes (1)";
+        } else {
+          addNoteText.textContent = "Add Notes";
+        }
+  
+        modal.classList.add("hidden");
+      });
+    });
+
+     // Sidebar functionality
+    // Sidebar functionality
+    const sidebar = document.getElementById('sidebar');
+      const sidebarToggle = document.getElementById('sidebarToggle');
+      const closeSidebar = document.getElementById('closeSidebar');
+      const overlay = document.getElementById('overlay');
+
+      function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+      }
+
+      function closeSidebarMenu() {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      }
+
+      sidebarToggle.addEventListener('click', openSidebar);
+      closeSidebar.addEventListener('click', closeSidebarMenu);
+      overlay.addEventListener('click', closeSidebarMenu);
+
+  </script>
+
+  
+  
+  
+
+</body>
+</html>

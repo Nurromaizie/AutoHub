@@ -1,0 +1,87 @@
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .fade-out {
+            animation: fadeOut 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="h-screen flex fade-in">
+    <div class="bg-[#343434] text-[#7f7f7f] w-64 h-full flex flex-col justify-between p-6">
+        <div class="absolute top-4 left-4">
+            <button aria-label="Back" class="text-gray-400 hover:text-gray-200">
+                <i class="fas fa-arrow-left text-white"></i>
+            </button>
+        </div>
+        <div class="ml-12">
+            <h1 class="text-3xl text-white font-bold mb-10">AutoHub</h1>
+            <nav class="space-y-6">
+                <a href="#" class="block text-white">HOME</a>
+                <a href="#" class="block text-white">SUV</a>
+                <a href="#" class="block text-white">MPV</a>
+                <a href="#" class="block text-white">HATCHBACK</a>
+                <a href="#" class="block text-white">SEDAN</a>
+                <a href="#" class="block text-white">COUPE</a>
+                <a href="#" class="block text-white">LUXURY</a>
+                <a href="#" class="block text-white">SPORT</a>
+            </nav>
+        </div>
+        <div class="space-y-4">
+            <a href="{% url 'about' %}" class="flex items-center space-x-2 text-white">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a>
+            <a href="#" class="flex items-center space-x-2 text-white">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Log out</span>
+            </a>
+        </div>
+    </div>
+    <div class="flex-1 bg-[#7f7f7f] relative">
+        <div class="absolute top-4 right-2 flex space-x-4 text-white">
+            <button aria-label="Profile" class="hover:text-gray-200">
+                <i class="fas fa-user text-lg"></i>
+            </button>
+            <button aria-label="Search" class="hover:text-gray-200">
+                <a href="{% url 'search' %}" class="flex items-center space-x-2 text-lg">
+                    <i class="fas fa-search text-lg"></i>
+                </a>
+            </button>
+        </div>
+    </div>
+    <script>
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                    window.location.href = link.href;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

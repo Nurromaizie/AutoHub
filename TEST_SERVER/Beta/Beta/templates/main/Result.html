@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Search Results</title>
+  <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #d1d5db 100%);
+      min-height: 100vh;
+    }
+
+    /* Add blur effect to the background */
+    .blur-background {
+      filter: blur(5px);
+    }
+
+    /* Extra transition for the popup itself */
+    .popup-content {
+      transform: scale(0.9);
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+    .popup-content.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .blur-dark {
+    filter: blur(5px) brightness(0.7); /* Blur + darken */
+    transition: all 0.3s ease-in-out;
+  }
+
+  .fade-in {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-out.hide {
+  opacity: 0;
+}
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4">
+  <!-- Sidebar (hidden by default) -->
+<div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-[#343434] text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 p-6">
+
+
+  <div class="absolute top-4 left-4">
+      <button id="closeSidebar" aria-label="Close" class="text-gray-400 hover:text-gray-200">
+          <i class="fas fa-arrow-left text-white"></i>
+      </button>
+  </div>
+  <div class="ml-12 mt-12">
+      <h1 class="text-3xl font-bold mb-10">AutoHub</h1>
+      <nav class="space-y-6">
+        <a href="{% url 'homepage' %}" class="block text-white">HOME</a>
+        <a href="{% url 'SUV_category' %}" class="block text-white">SUV</a>
+        <a href="{% url 'MPV_category' %}" class="block text-white">MPV</a>
+        <a href="{% url 'hatchback_category' %}" class="block text-white">HATCHBACK</a>
+        <a href="{% url 'sedan_category' %}" class="block text-white">SEDAN</a>
+        <a href="{% url 'coupe_category' %}" class="block text-white">COUPE</a>
+        <a href="{% url 'luxury_category' %}" class="block text-white">LUXURY</a>
+        <a href="{% url 'sport_category' %}" class="block text-white">SPORT</a>
+      </nav>
+      <div class="space-y-4 mt-10">
+          <a href="{% url 'about' %}" class="flex items-center space-x-2">
+              <i class="fas fa-info-circle"></i>
+              <span>About</span>
+          </a>
+          <a href="{% url 'login' %}" class="flex items-center space-x-2">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Log out</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="w-full max-w-md">
+    <header class="flex justify-between items-center mb-4">
+      <button id="sidebarToggle" aria-label="Menu" class="text-black text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+        <div class="flex space-x-4">
+      <a href="{% url 'profile' %}" aria-label="Profile" class="hover:text-gray-200">
+        <img src="https://i.ibb.co/d489N1xY/image-27.png" alt="Profile" class="w-6 h-6">
+      </a>
+      <a href="{% url 'search' %}" aria-label="Search" class="hover:text-gray-200">
+        <img src="https://i.ibb.co/N2X0BD7S/search.png" alt="Search" class="w-6 h-6">
+      </a>
+    </div>
+  </div>  
+      </header>
+      
+    </header>
+    <main>
+      <h1 class="text-gray-600 text-2xl mb-3 font-normal text-center">
+        Search results for
+        <span id="searchTerm" class="font-semibold">“{{ query }}”</span>
+      </h1>
+      <form class="mb-2 relative">
+        <input
+          aria-label="Search input"
+          class="w-full rounded-md bg-gray-300 text-gray-700 px-3 py-2 pr-10 text-base placeholder-gray-600 focus:outline-none"
+          type="text"
+          value="{{ query }}"
+        />
+        <button
+          aria-label="Search"
+          class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-700"
+          type="submit"
+        >
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+      <div class="flex justify-end mb-3 items-center space-x-1">
+        <label class="text-xs text-gray-700" for="sortTrigger">Sort :</label>
+        <div id="sortTrigger" class="text-xs border border-gray-400 rounded px-2 py-1 cursor-pointer bg-gray-300">
+          Reference
+        </div>
+      </div>
+      <section class="space-y-5">
+        {% if results %}
+          {% for car in results %}
+            <article class="bg-gray-300 rounded-md border border-black p-4 flex flex-col sm:flex-row sm:items-center">
+              <div class="flex items-center space-x-4 flex-1">
+                <img src="{{ car.image_url }}" alt="{{ car.name }}" width="120" />
+                <div class="flex flex-col">
+                  <p class="font-extrabold text-black text-sm max-w-[130px]">{{ car.name }} {{ car.year }}</p>
+                  <div class="flex flex-col space-y-2 text-xs text-gray-800 sm:text-sm mt-2">
+                    <span class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap">${{ car.price }}</span>
+                    <span class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap">{{ car.engine }}, {{ car.transmission }}</span>
+                    <span class="bg-white rounded-full px-3 py-1 w-max text-center whitespace-nowrap">{{ car.seats }} Seater</span>
+                  </div>
+                </div>
+              </div>
+              <a class="text-xs text-blue-600 mt-3 sm:mt-0 ml-auto" href="{% url 'car_detail' car.id %}">More Details</a>
+            </article>
+          {% endfor %}
+        {% else %}
+          <p class="text-center text-gray-500">No cars found for "{{ query }}"</p>
+        {% endif %}
+      </section>
+      
+      
+    </main>
+  </div>
+
+  <!-- Sort Filter Pop-up -->
+  <div id="sortPopup" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-center justify-center z-50 hidden fade-in">
+  <div class="popup-content bg-gray-200 rounded-lg p-6 w-[90%] max-w-sm relative space-y-4">
+    <button id="closeSortPopup" class="absolute top-2 right-2 text-xl text-gray-800 font-bold">&times;</button>
+
+    <!-- PRICE Section -->
+<div>
+  <h2 id="togglePrice" class="text-black font-semibold cursor-pointer flex justify-between items-center">
+    PRICE
+    <span id="arrowPrice">▼</span>
+  </h2>
+  <ul id="priceOptions" class="ml-6 mt-2 space-y-1 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+    <li onclick="applySort('high')" class="cursor-pointer hover:text-blue-600 list-disc">HIGHER TO LOW</li>
+    <li onclick="applySort('low')" class="cursor-pointer hover:text-blue-600 list-disc">LOW TO HIGHER</li>
+
+  </ul>
+</div>
+
+    <!-- SEAT Section -->
+<div>
+  <h2 id="toggleSeat" class="text-black font-semibold cursor-pointer flex justify-between items-center">
+    SEAT
+    <span id="arrowSeat">▼</span>
+  </h2>
+  <ul id="seatOptions" class="ml-6 mt-2 space-y-1 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+    <li onclick="applySeat(2)" class="cursor-pointer hover:text-blue-600 list-disc">2 SEATER</li>
+    <li onclick="applySeat(3)" class="cursor-pointer hover:text-blue-600 list-disc">3 SEATER</li>
+    <li onclick="applySeat(5)" class="cursor-pointer hover:text-blue-600 list-disc">5 SEATER</li>
+    <li onclick="applySeat(7)" class="cursor-pointer hover:text-blue-600 list-disc">7 SEATER</li>
+    <li onclick="applySeat(9)" class="cursor-pointer hover:text-blue-600 list-disc">9 SEATER</li>
+  </ul>
+</div>
+
+<!-- TRANSMISSION Section -->
+<div>
+  <h2 id="togglePerformance" class="text-black font-semibold cursor-pointer flex justify-between items-center">
+    TRANSMISSION
+    <span id="arrowPerformance">▼</span>
+  </h2>
+  <ul id="performanceOptions" class="ml-6 mt-2 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+    <li onclick="applyTransmission('automatic')" class="cursor-pointer hover:text-blue-600 list-disc">AUTOMATIC</li>
+    <li onclick="applyTransmission('manual')" class="cursor-pointer hover:text-blue-600 list-disc">MANUAL</li>
+  </ul>
+</div>
+
+<!-- MODEL Section -->
+<div>
+  <h2 id="toggleModel" class="text-black font-semibold cursor-pointer flex justify-between items-center">
+    MODEL
+    <span id="arrowModel">▼</span>
+  </h2>
+  <ul id="modelOptions" class="ml-6 mt-2 space-y-1 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+    <li onclick="applyModel('SUV')" class="cursor-pointer hover:text-blue-600 list-disc">SUV</li>
+    <li onclick="applyModel('MPV')" class="cursor-pointer hover:text-blue-600 list-disc">MPV</li>
+    <li onclick="applyModel('HATCHBACK')" class="cursor-pointer hover:text-blue-600 list-disc">HATCHBACK</li>
+    <li onclick="applyModel('SEDAN')" class="cursor-pointer hover:text-blue-600 list-disc">SEDAN</li>
+    <li onclick="applyModel('COUPE')" class="cursor-pointer hover:text-blue-600 list-disc">COUPE</li>
+    <li onclick="applyModel('LUXURY')" class="cursor-pointer hover:text-blue-600 list-disc">LUXURY</li>
+    <li onclick="applyModel('SPORT')" class="cursor-pointer hover:text-blue-600 list-disc">SPORT</li>
+  </ul>
+</div>
+
+  </div>
+</div>
+
+
+  <script>
+      // ✅ Define filter functions globally FIRST
+      function getBaseQuery() {
+        const url = new URL(window.location.href);
+        const query = url.searchParams.get('query') || '';
+        return query;
+      }
+      
+      function applySort(order) {
+        const query = getBaseQuery();
+        window.location.href = `/result/?query=${encodeURIComponent(query)}&sort=${order}`;
+      }
+      
+      function applySeat(count) {
+        const query = getBaseQuery();
+        window.location.href = `/result/?query=${encodeURIComponent(query)}&seat=${count}`;
+      }
+      
+      function applyTransmission(type) {
+        const query = getBaseQuery();
+        window.location.href = `/result/?query=${encodeURIComponent(query)}&transmission=${type}`;
+      }
+      
+      function applyModel(model) {
+        const query = getBaseQuery();
+        window.location.href = `/result/?query=${encodeURIComponent(query)}&model=${model}`;
+      }
+      
+      // ✅ Then wrap DOM logic inside DOMContentLoaded
+      document.addEventListener('DOMContentLoaded', function () {
+        const sortTrigger = document.getElementById('sortTrigger');
+        const popup = document.getElementById('sortPopup');
+        const popupContent = document.querySelector('.popup-content');
+        const mainContent = document.getElementById('mainContent');
+        const closeBtn = document.getElementById('closeSortPopup');
+        const searchInput = document.querySelector('input[type="text"]');
+        const searchButton = document.querySelector('button[type="submit"]');
+      
+        // Section toggle logic...
+        const toggleSections = [
+          { headerId: 'togglePrice', contentId: 'priceOptions', arrowId: 'arrowPrice' },
+          { headerId: 'toggleSeat', contentId: 'seatOptions', arrowId: 'arrowSeat' },
+          { headerId: 'togglePerformance', contentId: 'performanceOptions', arrowId: 'arrowPerformance' },
+          { headerId: 'toggleModel', contentId: 'modelOptions', arrowId: 'arrowModel' }
+        ];
+      
+        toggleSections.forEach(section => {
+          const header = document.getElementById(section.headerId);
+          const content = document.getElementById(section.contentId);
+          const arrow = document.getElementById(section.arrowId);
+      
+          header.addEventListener('click', () => {
+            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+              content.style.maxHeight = "0px";
+              arrow.textContent = "▼";
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+              arrow.textContent = "▲";
+            }
+          });
+        });
+      
+        // Sidebar logic
+        const sidebar = document.getElementById('sidebar');
+        const toggleButton = document.getElementById('sidebarToggle');
+        const closeButton = document.getElementById('closeSidebar');
+      
+        toggleButton.addEventListener('click', () => {
+          sidebar.classList.toggle('-translate-x-full');
+          mainContent.classList.add('blur-dark');
+        });
+      
+        closeButton.addEventListener('click', () => {
+          sidebar.classList.add('-translate-x-full');
+          mainContent.classList.remove('blur-dark');
+        });
+      
+        // Set query text
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get('query') || "Toyota";
+        document.getElementById('searchTerm').textContent = `“${query}”`;
+        if (searchInput) searchInput.value = query;
+      
+        // Search submission
+        function handleSearch(event) {
+          event.preventDefault();
+          const newQuery = searchInput.value.trim();
+          if (newQuery.length > 0) {
+            window.location.href = `/result/?query=${encodeURIComponent(newQuery)}`;
+          } else {
+            alert("Please enter something to search.");
+          }
+        }
+      
+        searchButton.addEventListener('click', handleSearch);
+        searchInput.addEventListener('keypress', function (event) {
+          if (event.key === 'Enter') {
+            handleSearch(event);
+          }
+        });
+      
+        // Popup toggle
+        sortTrigger.addEventListener('click', () => {
+          popup.classList.remove('hidden');
+          setTimeout(() => {
+            popup.classList.add('show');
+          }, 10);
+          popupContent.classList.add('show');
+          mainContent.classList.add('blur-background');
+        });
+      
+        closeBtn.addEventListener('click', () => {
+          popupContent.classList.remove('show');
+          popup.classList.remove('show');
+          setTimeout(() => {
+            popup.classList.add('hidden');
+          }, 300);
+          mainContent.classList.remove('blur-background');
+        });
+      });
+      
+  </script>
+</body>
+</html>
