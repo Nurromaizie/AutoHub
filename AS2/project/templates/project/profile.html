@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AutoHub</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400&family=Montserrat:wght@300&family=Poppins:wght@700&family=Raleway&display=swap" rel="stylesheet">
   <style>
     body {
@@ -14,7 +15,20 @@
     }
     .autohub-title {
       font-family: 'Exo 2', sans-serif; 
-    }
+    } 
+    @keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-slide-up {
+  animation: fadeSlideUp 0.4s ease-out forwards;
+}
   </style>
 </head>
 
@@ -22,13 +36,45 @@
 
   <!-- Header -->
   <div class="relative bg-[#7F7F7F] h-[168px] flex items-start justify-between px-5 pt-4" style="width: 430px; flex-shrink: 0;">
-
-    <!-- Menu Icon -->
-    <div class="w-6 h-6">
-      <svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
+    <div class="absolute top-4 left-4">
+      <button id="sidebarToggle" aria-label="Menu">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
     </div>
+    
+
+    <!-- Sidebar -->
+  <div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm z-40 hidden"></div>
+  <div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-[#343434] text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 p-6">
+    <div class="absolute top-4 left-4">
+      <button id="closeSidebar" aria-label="Close" class="text-gray-400 hover:text-gray-200">
+        <i class="fas fa-arrow-left text-white"></i>
+      </button>
+    </div>
+    <div class="ml-12 mt-12">
+      <h1 class="text-3xl font-bold mb-10">AutoHub</h1>
+      <nav class="space-y-6">
+        <a href="#" class="block text-white">HOME</a>
+        <a href="#" class="block text-white">SUV</a>
+        <a href="#" class="block text-white">MPV</a>
+        <a href="#" class="block text-white">HATCHBACK</a>
+        <a href="#" class="block text-white">SEDAN</a>
+        <a href="#" class="block text-white">COUPE</a>
+        <a href="#" class="block text-white">LUXURY</a>
+        <a href="#" class="block text-white">SPORT</a>
+      </nav>
+      <div class="space-y-4 mt-10">
+        <a href="#" class="flex items-center space-x-2 text-white">
+          <i class="fas fa-info-circle"></i><span>About</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 text-white">
+          <i class="fas fa-sign-out-alt"></i><span>Log out</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
     <!-- Title Centered -->
     <h1 class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-base font-semibold autohub-title">
@@ -37,7 +83,9 @@
     </h1>
 
     <!-- Home Icon -->
-    <div class="w-6 h-6">
+    
+<div class="absolute top-4 right-4 w-6 h-6">
+
       <svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 22V12h6v10" />
@@ -134,5 +182,30 @@
     </div>
   </div>
 
+  <script>
+  // Sidebar functionality
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const closeSidebar = document.getElementById('closeSidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openSidebar() {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
+    }
+
+    function closeSidebarMenu() {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    }
+
+    sidebarToggle.addEventListener('click', openSidebar);
+    closeSidebar.addEventListener('click', closeSidebarMenu);
+    overlay.addEventListener('click', closeSidebarMenu);
+    function toggleShare() {
+  const modal = document.getElementById("shareModal");
+  modal.classList.toggle("hidden");
+}
+</script>
 </body>
 </html>
