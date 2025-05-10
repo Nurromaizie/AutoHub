@@ -16,12 +16,25 @@
     .autohub-title {
       font-family: 'Exo 2', sans-serif;
       font-size: 24px;
-    }
+    } 
+    @keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-slide-up {
+  animation: fadeSlideUp 0.4s ease-out forwards;
+}
   </style>
 </head>
 <body class="font-sans relative">
-
-  <!-- Sidebar -->
+    <!-- Sidebar -->
+  <div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm z-40 hidden"></div>
   <div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-[#343434] text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 p-6">
     <div class="absolute top-4 left-4">
       <button id="closeSidebar" aria-label="Close" class="text-gray-400 hover:text-gray-200">
@@ -31,7 +44,7 @@
     <div class="ml-12 mt-12">
       <h1 class="text-3xl font-bold mb-10">AutoHub</h1>
       <nav class="space-y-6">
-        <a href="#" class="block text-white">HOME</a>
+        <a href="index.html" class="block text-white">HOME</a>
         <a href="#" class="block text-white">SUV</a>
         <a href="#" class="block text-white">MPV</a>
         <a href="#" class="block text-white">HATCHBACK</a>
@@ -44,27 +57,24 @@
         <a href="#" class="flex items-center space-x-2 text-white">
           <i class="fas fa-info-circle"></i><span>About</span>
         </a>
-        <a href="#" class="flex items-center space-x-2 text-white">
+        <a href="login.html" class="flex items-center space-x-2 text-white">
           <i class="fas fa-sign-out-alt"></i><span>Log out</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- Overlay -->
-  <div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm z-40 hidden"></div>
-
   <!-- Main Content -->
   <div id="mainContent" class="relative z-10">
     <!-- Header -->
-    <div class="absolute top-2 left-2 z-50">
+  
+    <div class="absolute top-2 left-2">
       <button id="sidebarToggle" aria-label="Menu">
         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </div>
-
     <div class="absolute top-10 left-3 flex items-center space-x-1">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Brunei.svg" alt="Brunei Flag" class="w-4 h-3">
       <span class="text-white text-sm">BND</span>
@@ -140,28 +150,8 @@
     </div>
   </div>
 
-  <!-- Sidebar Toggle Script -->
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const closeSidebar = document.getElementById('closeSidebar');
-
-    sidebarToggle.addEventListener('click', () => {
-      sidebar.classList.remove('-translate-x-full');
-      overlay.classList.remove('hidden');
-    });
-
-    closeSidebar.addEventListener('click', () => {
-      sidebar.classList.add('-translate-x-full');
-      overlay.classList.add('hidden');
-    });
-
-    overlay.addEventListener('click', () => {
-      sidebar.classList.add('-translate-x-full');
-      overlay.classList.add('hidden');
-    });
-  </script>
+  
+   
 
  <!-- Search Modal -->
 <div id="searchModal" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden z-50">
@@ -207,7 +197,31 @@
 
 
   <!-- Search Script -->
-  <script>
+  <script> 
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const closeSidebar = document.getElementById('closeSidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openSidebar() {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
+    }
+
+    function closeSidebarMenu() {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    }
+
+    sidebarToggle.addEventListener('click', openSidebar);
+    closeSidebar.addEventListener('click', closeSidebarMenu);
+    overlay.addEventListener('click', closeSidebarMenu);
+    function toggleShare() {
+  const modal = document.getElementById("shareModal");
+  modal.classList.toggle("hidden");
+}
+
+  
     const searchModal = document.getElementById("searchModal");
     const openSearch = document.getElementById("openSearch");
     const closeSearch = document.getElementById("closeSearch");
