@@ -26,20 +26,20 @@
   <div class="ml-12 mt-12">
     <h1 class="text-3xl font-bold mb-10">AutoHub</h1>
     <nav class="space-y-6">
-      <a href="homepage.html" class="block text-white">HOME</a>
-      <a href="SUVpage.html" class="block text-white">SUV</a>
-      <a href="MPV.html" class="block text-white">MPV</a>
-      <a href="Hatchbackpage.html" class="block text-white">HATCHBACK</a>
-      <a href="sedan.html" class="block text-white">SEDAN</a>
-      <a href="Coupe (Category).html" class="block text-white">COUPE</a>
-      <a href="Luxury (Category).html" class="block text-white">LUXURY</a>
-      <a href="Sportpage.html" class="block text-white">SPORT</a>
+      <a href="{% url 'homepage' %}" class="block text-white">HOME</a>
+        <a href="{% url 'SUV_category' %}" class="block text-white">SUV</a>
+        <a href="{% url 'MPV_category' %}" class="block text-white">MPV</a>
+        <a href="{% url 'hatchback_category' %}" class="block text-white">HATCHBACK</a>
+        <a href="{% url 'sedan_category' %}" class="block text-white">SEDAN</a>
+        <a href="{% url 'coupe_category' %}" class="block text-white">COUPE</a>
+        <a href="{% url 'luxury_category' %}" class="block text-white">LUXURY</a>
+        <a href="{% url 'sport_category' %}" class="block text-white">SPORT</a>
     </nav>
     <div class="space-y-4 mt-10">
-      <a href="AboutPage.html" class="flex items-center space-x-2">
+      <a href="{% url 'about' %}" class="flex items-center space-x-2">
         <i class="fas fa-info-circle"></i><span>About</span>
       </a>
-      <a href="login.html" class="flex items-center space-x-2">
+      <a href="{% url 'login' %}" class="flex items-center space-x-2">
         <i class="fas fa-sign-out-alt"></i><span>Log out</span>
       </a>
     </div>
@@ -67,13 +67,13 @@
   </div>    
   <!-- Category Header with Arrows -->
   <div class="flex justify-center items-center space-x-4 mt-2">
-    <button>
-      <img src="https://i.ibb.co/5NpV4tJ/ri-arrow-left-s-fill-1.png" alt="Left" class="w-6 h-6">
-    </button>
+    <a href="{% url 'luxury_category' %}"> <!-- Kiri -->
+      <img src="https://i.ibb.co/5NpV4tJ/ri-arrow-left-s-fill-1.png" alt="Previous" class="w-6 h-6 hover:opacity-70">
+    </a>
     <h1 class="text-2xl font-bold">Sport</h1>
-    <button>
-      <img src="https://i.ibb.co/KzKgSB6L/ri-arrow-left-s-fill.png" alt="Right" class="w-6 h-6">
-    </button>
+    <a href="{% url 'SUV_category' %}"> <!-- Kanan -->
+      <img src="https://i.ibb.co/KzKgSB6L/ri-arrow-left-s-fill.png" alt="Next" class="w-6 h-6 hover:opacity-70">
+    </a>
   </div>
 
   <!-- Car Listings -->

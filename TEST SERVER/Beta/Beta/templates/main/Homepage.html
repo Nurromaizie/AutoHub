@@ -218,7 +218,7 @@
     </div>
 
   <!-- Scrollable Car Cards in 5x2 Style -->
-  <div class="overflow-x-auto overflow-y-hidden pb-4">
+  <div class="overflow-x-auto overflow-y-hidden pb-4 mt-4">
     <div class="grid grid-rows-2 grid-flow-col auto-cols-max gap-3 w-max">
       {% for car in cars %}
         <a href="{% url 'car_detail' car.id %}">
